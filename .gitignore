@@ -1,5 +1,6 @@
 node_modules
 .png
+serviceAccountKey.json
 build/
 coverage/
 npm-debug.log
