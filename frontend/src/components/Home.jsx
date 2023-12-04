@@ -12,7 +12,7 @@ export default function Home() {
           <Link to={"/signup"} className="home-link">
             SignUp
           </Link>
-          <Link to={"/signip"} className="home-link">
+          <Link to={"/signin"} className="home-link">
             SignIn
           </Link>
         </div>
