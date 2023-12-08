@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "./Firebase";
-import "../styles/signup_signin.css";
+import "./signup_signin.css";
 
 export default function Signup() {
   const [input, setInput] = useState({

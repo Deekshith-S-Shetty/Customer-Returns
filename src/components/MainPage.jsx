@@ -1,6 +1,13 @@
 import React from "react";
 import Header from "./Header";
+import Customer from "./Customer";
+import "./MainPage.css";
 
 export default function MainPage() {
-  return <Header />;
+  return (
+    <div className="main-page">
+      <Header />
+      <Customer />
+    </div>
+  );
 }

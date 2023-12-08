@@ -1,0 +1,22 @@
+.header {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  width: 100%;
+}
+
+.header-item {
+  padding: 20px 0;
+  font-size: large;
+  font-weight: bold;
+}
+
+.header-text {
+  color: white;
+}
+
+.header-item:hover {
+  color: #fec962;
+}
