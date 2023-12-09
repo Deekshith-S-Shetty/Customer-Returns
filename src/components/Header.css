@@ -8,15 +8,35 @@
 }
 
 .header-item {
-  padding: 20px 0;
+  margin: 20px 0;
   font-size: large;
   font-weight: bold;
+  display: inline-block;
+  position: relative;
 }
 
 .header-text {
   color: white;
 }
 
+.header-item:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #55c2da;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
 .header-item:hover {
-  color: #fec962;
+  color: #55c2da;
+}
+
+.header-item:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }

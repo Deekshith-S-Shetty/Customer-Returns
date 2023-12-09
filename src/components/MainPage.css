@@ -1,5 +1,6 @@
 .main-page {
   width: 100%;
+  height: 200vh;
 }
 
 .main-page::before {

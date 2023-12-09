@@ -1,7 +1,12 @@
 * {
   margin: 0;
   padding: 0;
-  background-color: black;
+  background: linear-gradient(
+    75deg,
+    rgb(20, 23, 33) 0%,
+    rgb(20, 23, 33) 50%,
+    rgba(20, 23, 33, 0.8) 100%
+  );
 }
 
 body {
