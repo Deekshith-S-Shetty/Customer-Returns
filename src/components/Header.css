@@ -5,14 +5,13 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
-  position: fixed;
 }
 
 .header-item {
   background: none;
   color: #e8e8e8;
-  margin: 20px 0;
-  font-size: large;
+  margin: 30px 0;
+  font-size: 1.2rem;
   font-weight: bold;
   display: inline-block;
   position: relative;

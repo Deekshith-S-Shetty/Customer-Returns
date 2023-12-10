@@ -22,7 +22,7 @@ export default function Signup() {
     auth
       .createUserWithEmailAndPassword(input.email, input.password)
       .then((auth) => {
-        navigate("/");
+        navigate("/main");
       })
       .catch((error) => alert(error.message));
   };

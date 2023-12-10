@@ -13,7 +13,7 @@ export default function Signin() {
     auth
       .signInWithEmailAndPassword(input.userName, input.password)
       .then((auth) => {
-        navigate("/");
+        navigate("/main");
       })
       .catch((error) => alert(error.message));
   };
