@@ -1,12 +1,6 @@
 .auth-container {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(
-    75deg,
-    rgb(20, 23, 33) 0%,
-    rgb(20, 23, 33) 50%,
-    rgba(20, 23, 33, 0.8) 100%
-  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,7 +110,7 @@
 .btn,
 .btn-2 {
   color: #ebebeb;
-  background: #55c2da;
+  background: #2793f2;
   outline: none;
   border: 0;
   padding: 15px 30px;
@@ -135,7 +129,7 @@
 }
 
 .btn-2:hover {
-  background-color: #6ddcf5;
+  background-color: #22b7f2;
 }
 
 .redirect {
@@ -143,5 +137,5 @@
 }
 
 .link-color {
-  color: #55c2da;
+  color: #2793f2;
 }

@@ -1,13 +1,16 @@
 .header {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: rgba(255, 255, 255, 0.8);
+  background: none;
+  color: #e8e8e8;
   display: flex;
   justify-content: space-around;
-  position: fixed;
   width: 100%;
+  position: fixed;
 }
 
 .header-item {
+  background: none;
+  color: #e8e8e8;
   margin: 20px 0;
   font-size: large;
   font-weight: bold;
@@ -15,8 +18,8 @@
   position: relative;
 }
 
-.header-text {
-  color: white;
+.header-icon {
+  background: none;
 }
 
 .header-item:after {
