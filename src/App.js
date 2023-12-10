@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import MainPage from "./components/MainPage";
+import Return from "./components/Return";
 import "./App.css";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/main" element={<MainPage />} />
+        <Route path="/return" element={<Return />} />
       </Routes>
     </div>
   );
