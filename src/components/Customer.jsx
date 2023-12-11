@@ -9,7 +9,7 @@ export default function Customer() {
         <h2 className="orders-heading">YOUR ORDERS</h2>
         <div className="product">
           <div className="product-image">
-            <img src="./laptop.jpg" alt="laptop" className="product-image" />
+            <img src="/laptop.jpg" alt="laptop" className="product-image" />
           </div>
           <div className="product-info">
             <p className="product-name">Product Name is laptop</p>
@@ -23,7 +23,7 @@ export default function Customer() {
         </div>
         <div className="product">
           <div className="product-image">
-            <img src="./laptop.jpg" alt="laptop" className="product-image" />
+            <img src="/laptop.jpg" alt="laptop" className="product-image" />
           </div>
           <div className="product-info">
             <p className="product-name">Product Name is Laptop</p>
@@ -37,7 +37,7 @@ export default function Customer() {
         </div>
         <div className="product">
           <div className="product-image">
-            <img src="laptop.jpg" alt="laptop" className="product-image" />
+            <img src="/laptop.jpg" alt="laptop" className="product-image" />
           </div>
           <div className="product-info">
             <p className="product-name">Product Name is name</p>
