@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "./Header";
 import "./Return.css";
 
 export default function Return() {
@@ -15,10 +14,13 @@ export default function Return() {
 
   return (
     <div className="return-page">
-      <Header />
       <div className="return-container">
         <form onSubmit={handleSubmit} className="return-product-info">
           <h2 className="product-info-header">Product Information</h2>
+          <div className="product-group your-name">
+            <label className="product-label">Enter Your Name</label>
+            <input type="text" placeholder="Enter Your Name" required />
+          </div>
           <div className="product-group product-name">
             <label className="product-label">Product Name</label>
             <input type="text" placeholder="Product Name" required />

@@ -2,11 +2,12 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
-import MainPage from "./components/MainPage";
+import Customer from "./components/Customer";
 import Return from "./components/Return";
 import Manufacturer from "./components/Manufacturer";
-import Delievery from "./components/Delievery";
+import Delivery from "./components/Delivery";
 import Admin from "./components/Admin";
+import Header from "./components/Header";
 import "./App.css";
 
 function App() {
@@ -19,13 +20,53 @@ function App() {
 
         {/* These Routes should be displayed based on the user login */}
         <Route path="/main">
-          <Route index element={<MainPage />} />
-          <Route path="return" element={<Return />} />
+          <Route
+            index
+            element={
+              <>
+                <Header />
+                <Customer />
+              </>
+            }
+          />
+          <Route
+            path="return"
+            element={
+              <>
+                <Header />
+                <Return />
+              </>
+            }
+          />
         </Route>
 
-        <Route path="/manufacturer" element={<Manufacturer />} />
-        <Route path="/Delievery" element={<Delievery />} />
-        <Route path="/Admin" element={<Admin />} />
+        <Route
+          path="/manufacturer"
+          element={
+            <>
+              <Header />
+              <Manufacturer />
+            </>
+          }
+        />
+        <Route
+          path="/Delivery"
+          element={
+            <>
+              <Header />
+              <Delivery />
+            </>
+          }
+        />
+        <Route
+          path="/Admin"
+          element={
+            <>
+              <Header />
+              <Admin />
+            </>
+          }
+        />
       </Routes>
     </div>
   );
