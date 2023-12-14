@@ -1,0 +1,50 @@
+.header {
+  background-color: rgba(255, 255, 255, 0.8);
+  background: none;
+  color: #e8e8e8;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-image: linear-gradient(
+    75deg,
+    rgb(17, 18, 23) 0%,
+    rgb(20, 23, 33) 50%,
+    rgba(20, 23, 33, 0.8) 100%
+  );
+}
+
+.header-item {
+  background: none;
+  color: #e8e8e8;
+  margin: 30px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: inline-block;
+  position: relative;
+}
+
+.header-icon {
+  background: none;
+}
+
+.header-item:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #55c2da;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.header-item:hover {
+  color: #55c2da;
+}
+
+.header-item:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

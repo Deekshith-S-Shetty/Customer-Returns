@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 node_modules
 .png
 serviceAccountKey.json
@@ -9,6 +10,22 @@ box-node-express-skeleton-app/app/config/production.js
 box-node-express-skeleton-app/app/*_config.json
 config.json
 package-lock.json
+=======
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+>>>>>>> 7c800cf7d52018552c526dc66f1491b7e096fa2a
 .DS_Store
 .env.local
 .env.development.local
@@ -18,3 +35,5 @@ package-lock.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.env
