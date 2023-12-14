@@ -1,18 +1,13 @@
-var firebase = require("firebase-admin");
+var admin = require("firebase-admin");
 
-var serviceAccount = require("./serviceAccountKey.json");
+var serviceAccount = require("../Firebase/serviceAccountKey.json");
 
-firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
+const firebaseConfig = {
+  credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://customerreturn-97bdd-default-rtdb.firebaseio.com"
-});
+};
 
-const database = firebase.database();
+admin.initializeApp(firebaseConfig);
 
-var User = database.ref("users");
-// ref.once("value", function(snapshot) {
-//   console.log(snapshot.val());
-// });
-
-module.exports = User;
-
+  
+module.exports = admin;
