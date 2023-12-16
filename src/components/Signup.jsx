@@ -78,6 +78,13 @@ export default function Signup() {
                 />
                 <label>Confirm Password</label>
               </div>
+              <div className="input-container">
+                <select name="user" id="user-select" required>
+                  <option value="customer">Customer</option>
+                  <option value="manufacturer">Manufacturer</option>
+                  <option value="delivery">Delivery</option>
+                </select>
+              </div>
               <button type="submit" className="btn-2">
                 Sign Up
               </button>

@@ -70,7 +70,8 @@
   margin-left: 16px;
 }
 
-.input-container input {
+.input-container input,
+select {
   border: 0;
   border-bottom: 1px solid #555;
   background: transparent;
@@ -78,6 +79,14 @@
   padding: 8px 0 5px 0;
   font-size: 18px;
   color: #ebebeb;
+}
+
+#user-select {
+  background-color: rgb(59, 57, 57);
+  margin-top: 3px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 5px;
 }
 
 .input-container input::placeholder {
