@@ -29,7 +29,7 @@
   margin-bottom: 18px;
   border-bottom: 3px solid;
   display: inline-block;
-  width: 223px;
+  width: 224px;
 }
 
 .product {
@@ -73,6 +73,21 @@
   width: 150px;
 }
 
+.cancel{
+  background-color: rgb(241, 61, 61);
+}
+
 .return-btn:hover {
   background-color: #22b7f2;
+}
+
+.cancel:hover{
+  background-color: rgb(236, 17, 17);
+}
+
+.circle{
+  margin: 0 100px;
+  border: none;
+  height: 300px;
+  padding: 50px;
 }

@@ -1,19 +1,53 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "./Firebase";
+import { auth, db } from "./Firebase";
 import "./signup_signin.css";
+import { doc, getDocs, collection, getDoc } from "firebase/firestore";
+import { LoginContext } from "../Context/Context";
 
 export default function Signin() {
   const [input, setInput] = useState({ userName: "", password: "" });
   const navigate = useNavigate();
 
+  const { account, setAccount } = useContext(LoginContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     auth
       .signInWithEmailAndPassword(input.userName, input.password)
-      .then((auth) => {
-        navigate("/main");
+      .then(async(auth) => {
+        console.log(auth.user.uid);
+        const docRef = doc(db, "Users", auth.user.uid);
+
+        // Fetch the document
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          try {
+            const subcollectionRef = collection(docRef, "return");
+
+            // Fetch documents from the subcollection
+            const subcollectionDocs = await getDocs(subcollectionRef);
+            const subcollectionDataArray = subcollectionDocs.docs.map(
+              (subDoc) => ({
+                id: subDoc.id,
+                data: subDoc.data(),
+              })
+            );
+            setAccount({
+              data: docSnap.data(),
+              return: subcollectionDataArray,
+            });
+            
+          } catch (error) {
+            setAccount({ data: docSnap.data() });
+            console.error("Error fetching document: ", error);
+          }
+          navigate(`/${docSnap.data().userType.toLowerCase()}`);
+        } else {
+            console.log("No such document!");
+          }
       })
       .catch((error) => alert(error.message));
   };
