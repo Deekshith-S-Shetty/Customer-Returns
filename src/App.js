@@ -18,13 +18,20 @@ import { db } from "./components/Firebase";
 function App() {
   const { account, setAccount } = useContext(LoginContext);
 
+  const collections = {
+    Delivery: "Delivery",
+    Manufacturer: "Manufacturer",
+    Customer: "Customer",
+  };
+
   useEffect(() => {
     auth.onAuthStateChanged(async (authUser) => {
       console.log("The user is : ", authUser?.email);
 
       if (authUser) {
+        console.log(authUser);
         // Reference to the document
-        const docRef = doc(db, "Users", authUser.uid);
+        const docRef = doc(db, collections.Customer, authUser.uid);
 
         // Fetch the document
         const docSnap = await getDoc(docRef);
@@ -51,6 +58,7 @@ function App() {
             console.error("Error fetching document: ", error);
           }
         } else {
+          setAccount({ data: docSnap.data() });
           console.log("No such document!");
         }
       } else {
@@ -68,7 +76,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
         {/* These Routes should be displayed based on the user login */}
-        <Route path="/users">
+        <Route path="/customer">
           <Route
             index
             element={

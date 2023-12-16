@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "./Firebase";
@@ -6,13 +6,13 @@ import "./signup_signin.css";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function Signin() {
-  const [input, setInput] = useState({ userName: "", password: "",userType:"Users" });
+  const [input, setInput] = useState({ userName: "", password: "",userType:"Customer" });
   const navigate = useNavigate();
 
   const collections = {
     Delivery: "Delivery",
     Manufacturer: "Manufacturer",
-    Users: "Users",
+    Customer: "Customer",
   };
 
   const handleSubmit = (e) => {

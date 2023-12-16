@@ -10,7 +10,7 @@ export default function Signup() {
   const [input, setInput] = useState({
     fullName: "",
     email: "",
-    userType: "Users",
+    userType: "Customer",
     password: "",
     cpassword: "",
   });
@@ -18,7 +18,7 @@ export default function Signup() {
   const collections = {
     Delivery: "Delivery",
     Manufacturer: "Manufacturer",
-    Users: "Users",
+    Customer: "Customer",
   };
 
   const { account, setAccount } = useContext(LoginContext);

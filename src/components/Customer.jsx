@@ -8,6 +8,10 @@ export default function Customer() {
   const { account, setAccount } = useContext(LoginContext);
   console.log(account);
 
+  const handleCancel = ()=>{
+    // do cancel
+  };
+
   return (
     <div className="orders">
       <div className="products">
@@ -23,16 +27,16 @@ export default function Customer() {
               <p className="product-price">150000</p>
               <p className="product-status">Product status: status</p>
               {account.return.length ? (
-                <button className="return-btn cancel">Cancel return</button>
+                <button className="return-btn cancel" onClick={handleCancel}>Cancel return</button>
               ) : (
-                <Link to={"/main/return"} style={{ textDecoration: "none" }}>
+                <Link to={"/customer/return"} style={{ textDecoration: "none" }}>
                   <button className="return-btn">Return</button>
                 </Link>
               )}
             </div>
           </div>
         ) : (
-          <div className="circle">
+          <div className="circle" style={{cursor:"progress"}}>
             <CircularProgress />
             <h2> Loading....</h2>
           </div>
