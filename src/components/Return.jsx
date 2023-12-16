@@ -1,12 +1,60 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Return.css";
+import { LoginContext } from "../Context/Context";
+import { collection, doc, addDoc } from "firebase/firestore";
+import { db } from "./Firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function Return() {
   const [fileName, setFileNames] = useState([]);
+  const [inputField, setInputField] = useState({
+    name: "",
+    productName: "",
+    productId: "",
+    reason: "",
+  });
 
-  const handleSubmit = () => {};
+  const { account, setAccount } = useContext(LoginContext);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // reference to the collection
+    const mainCollectionRef = collection(db, "Users");
+
+    // document with custom ID
+    const mainDocRef = doc(mainCollectionRef, account.uid);
+
+    // Reference to the subcollection
+    const subCollectionRef = collection(mainDocRef, "return");
+
+    // Add document to the subcollection
+    addDoc(subCollectionRef, {
+      return: true,
+      name:inputField.name,
+      productName:inputField.productName,
+      productId:inputField.productId,
+      reason:inputField.reason,
+    })
+      .then((data) => {
+        setAccount((prev)=>({...prev,returnId:data.id}));
+        console.log("success", data.id);
+        navigate("/main");
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setInputField((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
     const files = e.target.files;
     setFileNames([...files]);
     e.target.name = fileName;
@@ -19,22 +67,43 @@ export default function Return() {
           <h2 className="product-info-header">Product Information</h2>
           <div className="product-group your-name">
             <label className="product-label">Enter Your Name</label>
-            <input type="text" placeholder="Enter Your Name" required />
+            <input
+              type="text"
+              placeholder="Enter Your Name"
+              name="name"
+              required
+              onChange={handleChange}
+              value={inputField.name}
+            />
           </div>
           <div className="product-group product-name">
             <label className="product-label">Product Name</label>
-            <input type="text" placeholder="Product Name" required />
+            <input
+              type="text"
+              placeholder="Product Name"
+              name="productName"
+              required
+              onChange={handleChange}
+              value={inputField.productName}
+            />
           </div>
           <div className="product-group product-id">
             <label className="product-label">Product Id</label>
-            <input type="text" placeholder="Product Id" required />
+            <input
+              type="text"
+              placeholder="Product Id"
+              name="productId"
+              required
+              onChange={handleChange}
+              value={inputField.productId}
+            />
           </div>
           <div className="product-group product-return-image">
             <label className="product-label">Product Images</label>
             <div className="upload-input">
               <input
                 type="file"
-                onChange={handleChange}
+                onChange={handleFileChange}
                 style={{ display: "none" }}
                 id="file-input"
                 multiple
@@ -60,7 +129,10 @@ export default function Return() {
               rows={9}
               className="return-desc-text"
               placeholder="Enter the reason for return"
+              name="reason"
               required
+              onChange={handleChange}
+              value={inputField.reason}
             />
           </div>
           <div className="product-group">

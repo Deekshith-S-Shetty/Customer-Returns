@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+node_modules
+.png
+serviceAccountKey.json
+build/
+coverage/
+npm-debug.log
+box-node-express-skeleton-app/app/config/local.js
+box-node-express-skeleton-app/app/config/production.js
+box-node-express-skeleton-app/app/*_config.json
+config.json
+package-lock.json
+=======
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -12,6 +25,7 @@
 /build
 
 # misc
+>>>>>>> 7c800cf7d52018552c526dc66f1491b7e096fa2a
 .DS_Store
 .env.local
 .env.development.local
