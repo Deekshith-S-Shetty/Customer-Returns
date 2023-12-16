@@ -1,27 +1,34 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, db } from "./Firebase";
+import { auth, customerArray, db, manufacturerArray } from "./Firebase";
 import "./signup_signin.css";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function Signin() {
-  const [input, setInput] = useState({ userName: "", password: "",userType:"Customer" });
+  const [input, setInput] = useState({ userName: "", password: ""});
+  const [userType,setUserType] = useState("customer");
   const navigate = useNavigate();
-
-  const collections = {
-    Delivery: "Delivery",
-    Manufacturer: "Manufacturer",
-    Customer: "Customer",
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     auth
       .signInWithEmailAndPassword(input.userName, input.password)
-      .then(async(auth) => {
-        console.log(auth.user.uid);
-        const docRef = doc(db, input.userType, auth.user.uid);
+      .then(async(authUser) => {
+
+        let userType;
+        if(customerArray.includes(authUser.user.uid)){
+          userType = "customer";
+        }
+        else if(manufacturerArray.includes(authUser.user.uid)){
+          userType = "manufacturer";
+        }
+        else{
+          userType = "delivery";
+        }
+
+        const docRef = doc(db, userType, authUser.user.uid);
 
         // Fetch the document
         const docSnap = await getDoc(docRef);
@@ -58,21 +65,6 @@ export default function Signin() {
                 value={input.userName}
               />
               <label>User Email</label>
-            </div>
-            <br />
-            <div className="input-container">
-            <select
-                  name="userType"
-                  value={input.userType}
-                  onChange={handleChange}
-                >
-                  {Object.entries(collections).map(([key, value]) => (
-                    <option key={key} value={key}>
-                      {value}
-                    </option>
-                  ))}
-                </select>
-                <label>Account Type</label>
             </div>
             <br />
             <div className="input-container">

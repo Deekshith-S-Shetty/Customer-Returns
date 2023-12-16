@@ -20,11 +20,9 @@ export default function Return() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // reference to the collection
-    const mainCollectionRef = collection(db, "Users");
-
+    const customerRef = collection(db, "customer");
     // document with custom ID
-    const mainDocRef = doc(mainCollectionRef, account.uid);
+    const mainDocRef = doc(customerRef, account.uid);
 
     // Reference to the subcollection
     const subCollectionRef = collection(mainDocRef, "return");
@@ -38,9 +36,8 @@ export default function Return() {
       reason:inputField.reason,
     })
       .then((data) => {
-        setAccount((prev)=>({...prev,returnId:data.id}));
         console.log("success", data.id);
-        navigate("/main");
+        navigate("/customer");
       })
       .catch((err) => console.log(err));
   };
