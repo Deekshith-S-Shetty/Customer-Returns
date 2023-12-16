@@ -3,14 +3,17 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "./Firebase";
 import "./signup_signin.css";
-import { doc, getDocs, collection, getDoc } from "firebase/firestore";
-import { LoginContext } from "../Context/Context";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function Signin() {
-  const [input, setInput] = useState({ userName: "", password: "" });
+  const [input, setInput] = useState({ userName: "", password: "",userType:"Users" });
   const navigate = useNavigate();
 
-  const { account, setAccount } = useContext(LoginContext);
+  const collections = {
+    Delivery: "Delivery",
+    Manufacturer: "Manufacturer",
+    Users: "Users",
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,36 +21,14 @@ export default function Signin() {
       .signInWithEmailAndPassword(input.userName, input.password)
       .then(async(auth) => {
         console.log(auth.user.uid);
-        const docRef = doc(db, "Users", auth.user.uid);
+        const docRef = doc(db, input.userType, auth.user.uid);
 
         // Fetch the document
         const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-          try {
-            const subcollectionRef = collection(docRef, "return");
+        const direction = docSnap.data().userType.toLowerCase();
 
-            // Fetch documents from the subcollection
-            const subcollectionDocs = await getDocs(subcollectionRef);
-            const subcollectionDataArray = subcollectionDocs.docs.map(
-              (subDoc) => ({
-                id: subDoc.id,
-                data: subDoc.data(),
-              })
-            );
-            setAccount({
-              data: docSnap.data(),
-              return: subcollectionDataArray,
-            });
-            
-          } catch (error) {
-            setAccount({ data: docSnap.data() });
-            console.error("Error fetching document: ", error);
-          }
-          navigate(`/${docSnap.data().userType.toLowerCase()}`);
-        } else {
-            console.log("No such document!");
-          }
+        navigate(`/${direction}`);
       })
       .catch((error) => alert(error.message));
   };
@@ -77,6 +58,21 @@ export default function Signin() {
                 value={input.userName}
               />
               <label>User Email</label>
+            </div>
+            <br />
+            <div className="input-container">
+            <select
+                  name="userType"
+                  value={input.userType}
+                  onChange={handleChange}
+                >
+                  {Object.entries(collections).map(([key, value]) => (
+                    <option key={key} value={key}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+                <label>Account Type</label>
             </div>
             <br />
             <div className="input-container">
