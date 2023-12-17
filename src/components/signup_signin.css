@@ -87,6 +87,7 @@ select {
   border-radius: 5px;
   border: none;
   padding: 10px 5px;
+  outline: none;
 }
 
 .input-container input::placeholder {

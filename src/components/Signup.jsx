@@ -41,7 +41,7 @@ export default function Signup() {
         setDoc(docRef, {
           userType: input.userType,
           Email: input.email,
-          Name:input.fullName,
+          Name: input.fullName,
         })
           .then(() => {
             setAccount(data.user);
@@ -82,7 +82,6 @@ export default function Signup() {
                 />
                 <label>Name</label>
               </div>
-              <br />
               <div className="input-container">
                 <input
                   type="email"
@@ -94,22 +93,6 @@ export default function Signup() {
                 />
                 <label>Email</label>
               </div>
-              <br />
-              <div className="input-container">
-                <select
-                  name="userType"
-                  value={input.userType}
-                  onChange={handleChange}
-                >
-                  {Object.entries(collections).map(([key, value]) => (
-                    <option key={key} value={key}>
-                      {value}
-                    </option>
-                  ))}
-                </select>
-                <label>Account Type</label>
-              </div>
-              <br />
               <div className="input-container">
                 <input
                   type="password"
@@ -121,7 +104,6 @@ export default function Signup() {
                 />
                 <label>Password</label>
               </div>
-              <br />
               <div className="input-container">
                 <input
                   type="password"
@@ -143,7 +125,6 @@ export default function Signup() {
               <button type="submit" className="btn-2">
                 Sign Up
               </button>
-              <br />
               <div className="redirect">
                 Have an account?{" "}
                 <Link to="/signin" className="link-color">
