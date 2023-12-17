@@ -35,7 +35,7 @@ export default function Header() {
 
   return (
     <div className="header">
-      <Link to={"/main"} style={{ textDecoration: "none", background: "none" }}>
+      <Link to={"/customer"} style={{ textDecoration: "none", background: "none" }}>
         <p className="header-item">Customer-Returns</p>
       </Link>
       <Link

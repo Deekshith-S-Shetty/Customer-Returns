@@ -10,15 +10,15 @@ export default function Signup() {
   const [input, setInput] = useState({
     fullName: "",
     email: "",
-    userType: "Users",
+    userType: "customer",
     password: "",
     cpassword: "",
   });
 
   const collections = {
-    Delivery: "Delivery",
-    Manufacturer: "Manufacturer",
-    Users: "Users",
+    delivery: "delivery",
+    manufacturer: "manufacturer",
+    customer: "customer",
   };
 
   const { account, setAccount } = useContext(LoginContext);
@@ -44,7 +44,6 @@ export default function Signup() {
           Name: input.fullName,
         })
           .then(() => {
-            setAccount(data.user);
             navigate(`/${input.userType.toLowerCase()}`);
           })
           .catch((err) => console.log(err));

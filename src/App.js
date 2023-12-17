@@ -9,8 +9,8 @@ import Delivery from "./components/Delivery";
 import Admin from "./components/Admin";
 import Header from "./components/Header";
 import "./App.css";
-import { useContext, useEffect } from "react";
-import { auth } from "./components/Firebase";
+import { useContext, useEffect, useState } from "react";
+import { auth, customerArray, manufacturerArray } from "./components/Firebase";
 import { LoginContext } from "./Context/Context";
 import { doc, getDocs, collection, getDoc } from "firebase/firestore";
 import { db } from "./components/Firebase";
@@ -23,8 +23,21 @@ function App() {
       console.log("The user is : ", authUser?.email);
 
       if (authUser) {
+
+        let userType;
+        //find user type based on ID
+        if(customerArray.includes(authUser.uid)){
+          userType = "customer";
+        }
+        else if(manufacturerArray.includes(authUser.uid)){
+          userType = "manufacturer";
+        }
+        else{
+          userType = "delivery";
+        }
+        
         // Reference to the document
-        const docRef = doc(db, "Users", authUser.uid);
+        const docRef = doc(db, userType, authUser.uid);
 
         // Fetch the document
         const docSnap = await getDoc(docRef);
@@ -68,7 +81,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
         {/* These Routes should be displayed based on the user login */}
-        <Route path="/users">
+        <Route path="/customer">
           <Route
             index
             element={
