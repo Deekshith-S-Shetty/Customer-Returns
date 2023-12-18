@@ -8,35 +8,51 @@ export default function Customer() {
   const { account, setAccount } = useContext(LoginContext);
   console.log(account);
 
-  const handleCancel = ()=>{
+  const handleCancel = () => {
     // do cancel
   };
 
+  console.log(account?true:false);
+
   return (
     <div className="orders">
-      <div className="products">
+      <div className="customer-products">
         <h2 className="orders-heading">YOUR ORDERS</h2>
         {account ? (
-          <div className="product">
-            <div className="product-image">
-              <img src="/laptop.jpg" alt="laptop" className="product-image" />
+          account.item.map((data,index) => (
+            <div className="customer-product" key={index}>
+              <div className="customer-product-image">
+                <img
+                  src={data.product.image}
+                  alt="laptop"
+                  className="customer-product-image"
+                />
+              </div>
+              <div className="customer-product-info">
+                <p className="customer-product-name"><b>Product Name:</b> &nbsp;&nbsp;{data.product.name}</p>
+                <p className="customer-product-id"><b>Product Id:</b> &nbsp;&nbsp;{data.product.productId}</p>
+                <p className="customer-product-price"><b>Price:</b> &nbsp;&nbsp;{data.product.price}</p>
+                <p className="customer-product-status"><b>Status:</b> &nbsp;<span className={`${data.product.status}`}><span className="point"></span> {data.product.status}</span></p>
+                {data.product.return ? (
+                  <button
+                    className="customer-return-btn cancel"
+                    onClick={handleCancel}
+                  >
+                    Cancel return
+                  </button>
+                ) : (
+                  <Link
+                    to={"/customer/return"}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <button className="customer-return-btn">Return</button>
+                  </Link>
+                )}
+              </div>
             </div>
-            <div className="product-info">
-              <p className="product-name">Product Name is laptop</p>
-              <p className="product-id">Product is is id</p>
-              <p className="product-price">150000</p>
-              <p className="product-status">Product status: status</p>
-              {account.return.length ? (
-                <button className="return-btn cancel" onClick={handleCancel}>Cancel return</button>
-              ) : (
-                <Link to={"/customer/return"} style={{ textDecoration: "none" }}>
-                  <button className="return-btn">Return</button>
-                </Link>
-              )}
-            </div>
-          </div>
+          ))
         ) : (
-          <div className="circle" style={{cursor:"progress"}}>
+          <div className="circle" style={{ cursor: "progress" }}>
             <CircularProgress />
             <h2> Loading....</h2>
           </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "./Firebase";
@@ -62,6 +62,12 @@ export default function Signup() {
       [name]: value,
     }));
   };
+
+  useEffect(()=>{
+    if(account.data){
+      navigate(`/${account.data.userType.toLowerCase()}`);
+    }
+  });
 
   return (
     <div>

@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./Return.css";
-import { LoginContext } from "../Context/Context";
-import { collection, doc, addDoc } from "firebase/firestore";
+import { collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "./Firebase";
 import { useNavigate } from "react-router-dom";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 export default function Return() {
   const [fileName, setFileNames] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState();
   const [inputField, setInputField] = useState({
     name: "",
     productName: "",
@@ -14,32 +15,58 @@ export default function Return() {
     reason: "",
   });
 
-  const { account, setAccount } = useContext(LoginContext);
   const navigate = useNavigate();
+  let imageArr = [];
+
+  //upload filles to cloud
+  const handleFileUpload = async (file) => {
+    try {
+      const storage = getStorage();
+      const storageRef = ref(storage, "images/" + file.name);
+      const res = await uploadBytes(storageRef, file);
+      imageArr.push(res.metadata.fullPath);
+
+      console.log("File uploaded successfully.");
+    } catch (error) {
+      console.error("Error uploading file: ", error);
+    }
+  };
+
+  //manging file upload
+  const uploadAllFiles = async (files) => {
+    const uploadPromises = files.map((file) => handleFileUpload(file));
+    return Promise.all(uploadPromises);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const customerRef = collection(db, "customer");
-    // document with custom ID
-    const mainDocRef = doc(customerRef, account.uid);
+    await uploadAllFiles(selectedFiles);
 
-    // Reference to the subcollection
-    const subCollectionRef = collection(mainDocRef, "return");
+    const collectionRef = collection(db, "products");
+    // document with custom ID
+    const mainDocRef = doc(collectionRef, inputField.productId);
+
+    const { ...updateImages } = imageArr;
+    //updating image paths
+    const updatedReturn = {
+      ...inputField,
+      images: updateImages,
+    };
+    // Add document to the subcollection
+    console.log(updatedReturn);
 
     // Add document to the subcollection
-    addDoc(subCollectionRef, {
-      return: true,
-      name:inputField.name,
-      productName:inputField.productName,
-      productId:inputField.productId,
-      reason:inputField.reason,
+    updateDoc(mainDocRef, {
+      customer: updatedReturn,
     })
-      .then((data) => {
-        console.log("success", data.id);
-        navigate("/customer");
+      .then(() => {
+        navigate('/customer');
+        console.log("Document updated successfully!");
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+      });
   };
 
   const handleChange = (e) => {
@@ -51,9 +78,15 @@ export default function Return() {
     }));
   };
 
+  //handle file changing
   const handleFileChange = (e) => {
     const files = e.target.files;
-    setFileNames([...files]);
+
+    if (files.length > 0) {
+      const fileList = Array.from(files);
+      setFileNames([...files]);
+      setSelectedFiles(fileList);
+    }
     e.target.name = fileName;
   };
 

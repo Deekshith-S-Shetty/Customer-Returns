@@ -9,63 +9,96 @@ import Delivery from "./components/Delivery";
 import Admin from "./components/Admin";
 import Header from "./components/Header";
 import "./App.css";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { auth, customerArray, manufacturerArray } from "./components/Firebase";
 import { LoginContext } from "./Context/Context";
-import { doc, getDocs, collection, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "./components/Firebase";
+import ManufacturerHome from "./components/ManufacturerHome";
+import DeliveryHome from "./components/DeliveryHome";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 function App() {
   const { account, setAccount } = useContext(LoginContext);
 
+  // get image url
+  const getUrl = async(filePath) => {
+    try {
+      const storage = getStorage();
+      const fileRef = ref(storage, filePath);
+      const url = await getDownloadURL(fileRef);
+      return url;
+    } catch (error) {
+      console.error("Error getting download URL:", error);
+      throw error; 
+    }
+  };
+
+  const fetchData = async (documentRef,itemsArr) => {
+    try {
+      // Assuming documentRef is defined somewhere in your code
+      const doc = await getDoc(documentRef);
+      const documentData = doc.data();
+  
+      // Assuming getUrl is defined somewhere in your code
+      const path = await getUrl(documentData.product.image);
+      documentData.product.image = path;
+  
+      itemsArr.push(documentData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+
+  //finding Userdata
+  const findUserData = async (authUser) => {
+    let userType;
+    let itemsArr = [];
+
+    //find user type based on ID
+    if (customerArray.includes(authUser.uid)) {
+      userType = "customer";
+    } else if (manufacturerArray.includes(authUser.uid)) {
+      userType = "manufacturer";
+    } else {
+      userType = "delivery";
+    }
+
+    // Reference to the document
+    const docRef = doc(db, userType, authUser.uid);
+
+    // Fetch the document
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      try {
+        const promises = Object.entries(docSnap.data().orders).map(async ([key, value]) => {
+          const documentRef = doc(db, "products", value);
+          await fetchData(documentRef,itemsArr);
+        });
+  
+        // Wait for all promises to resolve before updating items
+        await Promise.all(promises);
+  
+        setAccount({ data: docSnap.data(), item: itemsArr });
+      } catch (error) {
+        setAccount({ data: docSnap.data() });
+        console.error("Error fetching document: ", error);
+      }
+    } else {
+      console.log("error");
+      alert("Somewent wrong please try again");
+    }
+  };
+
+  // track user auth status
   useEffect(() => {
     auth.onAuthStateChanged(async (authUser) => {
       console.log("The user is : ", authUser?.email);
 
       if (authUser) {
-
-        let userType;
-        //find user type based on ID
-        if(customerArray.includes(authUser.uid)){
-          userType = "customer";
-        }
-        else if(manufacturerArray.includes(authUser.uid)){
-          userType = "manufacturer";
-        }
-        else{
-          userType = "delivery";
-        }
-        
-        // Reference to the document
-        const docRef = doc(db, userType, authUser.uid);
-
-        // Fetch the document
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          try {
-            const subcollectionRef = collection(docRef, "return");
-
-            // Fetch documents from the subcollection
-            const subcollectionDocs = await getDocs(subcollectionRef);
-            const subcollectionDataArray = subcollectionDocs.docs.map(
-              (subDoc) => ({
-                id: subDoc.id,
-                data: subDoc.data(),
-              })
-            );
-            setAccount({
-              data: docSnap.data(),
-              return: subcollectionDataArray,
-            });
-            
-          } catch (error) {
-            setAccount({ data: docSnap.data() });
-            console.error("Error fetching document: ", error);
-          }
-        } else {
-          console.log("No such document!");
-        }
+        findUserData(authUser);
       } else {
         setAccount("");
         console.log("error");
@@ -102,24 +135,48 @@ function App() {
           />
         </Route>
 
-        <Route
-          path="/manufacturer"
-          element={
-            <>
-              <Header />
-              <Manufacturer />
-            </>
-          }
-        />
-        <Route
-          path="/Delivery"
-          element={
-            <>
-              <Header />
-              <Delivery />
-            </>
-          }
-        />
+        <Route path="/manufacturer">
+          <Route
+            index
+            element={
+              <>
+                <Header />
+                <ManufacturerHome />
+              </>
+            }
+          />
+          <Route
+            path="product"
+            element={
+              <>
+                <Header />
+                <Manufacturer />
+              </>
+            }
+          />
+        </Route>
+
+        <Route path="/delivery">
+          <Route
+            index
+            element={
+              <>
+                <Header />
+                <DeliveryHome />
+              </>
+            }
+          />
+          <Route
+            path="deliver"
+            element={
+              <>
+                <Header />
+                <Delivery />
+              </>
+            }
+          />
+        </Route>
+
         <Route
           path="/Admin"
           element={

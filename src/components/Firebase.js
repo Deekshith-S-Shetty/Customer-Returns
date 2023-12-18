@@ -29,13 +29,6 @@ const manufacturerRef = collection(db, "manufacturer");
 const manufacturerSnapshot = await getDocs(manufacturerRef);
 const manufacturerArray = manufacturerSnapshot.docs.map((doc) => doc.id);
 
-//Delivery reference
-// const deliveryRef = collection(db, "delivery");
-// const deliverySnapshot = await getDocs(deliveryRef);
-// const deliveryArray = deliverySnapshot.docs.map((doc) => ({
-//   id: doc.id,
-// }));
-
 export {
   db,
   auth,

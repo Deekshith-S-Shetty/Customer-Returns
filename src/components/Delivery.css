@@ -1,3 +1,83 @@
+/* delivery home page styling */
+
+.delivery-home {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  background: none;
+  /* background-color: black; */
+  background-image: linear-gradient(
+    75deg,
+    rgb(20, 23, 33) 0%,
+    rgb(20, 23, 33) 50%,
+    rgba(20, 23, 33, 0.8) 100%
+  );
+  color: #55c2da;
+}
+
+.delivered-products {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  margin: 0 100px;
+  margin-bottom: 150px;
+  border-radius: 15px;
+  border: none;
+}
+
+.delivery-heading {
+  color: #55c2da;
+  font-size: 2rem;
+  margin-bottom: 18px;
+  border-bottom: 3px solid;
+  display: inline-block;
+  width: 150px;
+}
+
+.product {
+  background-color: #080606ab;
+  padding: 15px;
+  display: flex;
+  border-radius: 10px;
+  margin: 30px 0;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.product-image {
+  width: 120px;
+  border-radius: 8px;
+  margin-right: 50px;
+}
+
+.product-info {
+  color: white;
+  font-size: 1rem;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.delivery-btn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: #57e3ab;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 250px;
+}
+
+
+/* delivery details page styling */
+
 .delivery {
   color: white;
   min-height: 100vh;
