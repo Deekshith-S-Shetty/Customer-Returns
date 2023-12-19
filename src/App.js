@@ -17,6 +17,7 @@ import { db } from "./components/Firebase";
 import ManufacturerHome from "./components/ManufacturerHome";
 import DeliveryHome from "./components/DeliveryHome";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import AdminReview from "./components/AdminReview";
 
 function App() {
   const { account, setAccount } = useContext(LoginContext);
@@ -102,7 +103,7 @@ function App() {
         findUserData(authUser);
       } else {
         setAccount("");
-        // navigate('/');
+        navigate('/');
         console.log("error");
       }
     });
@@ -179,15 +180,26 @@ function App() {
           />
         </Route>
 
-        <Route
-          path="/Admin"
-          element={
-            <>
-              <Header />
-              <Admin />
-            </>
-          }
-        />
+        <Route path="/Admin">
+          <Route
+            index
+            element={
+              <>
+                <Header />
+                <Admin />
+              </>
+            }
+          />
+          <Route
+            path="review/:id"
+            element={
+              <>
+                <Header />
+                <AdminReview />
+              </>
+            }
+          />
+        </Route>
       </Routes>
     </div>
   );

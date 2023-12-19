@@ -57,7 +57,7 @@ export default function Admin() {
                         <span className="point"></span> {data.status}
                       </span>
                     </p>
-                    <button className="review-btn" onClick={() => navigate("")}>
+                    <button className="review-btn" onClick={() => navigate(`/admin/review/${data.productId}`)}>
                       Review
                     </button>
                   </div>
