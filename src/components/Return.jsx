@@ -23,13 +23,14 @@ export default function Return() {
   const updateData = async (documentRef,updatedData) => {
     try {
       //adding customer return data
-      const doc = await updateDoc(documentRef,{customer: updatedData});
+      await updateDoc(documentRef,{customer: updatedData});
 
       //updating status
       const statusUpdate = { 'product.status': 'pending','product.return':true };
 
-      const update = updateDoc(documentRef,statusUpdate);
-      return Promise.all(update,doc);
+      await Promise.all([
+        updateDoc(documentRef, statusUpdate)
+      ]);
       
     } catch (error) {
       console.error(error);

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
@@ -20,6 +20,7 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 function App() {
   const { account, setAccount } = useContext(LoginContext);
+  const navigate = useNavigate();
 
   // get image url
   const getUrl = async(filePath) => {
@@ -101,6 +102,7 @@ function App() {
         findUserData(authUser);
       } else {
         setAccount("");
+        // navigate('/');
         console.log("error");
       }
     });
