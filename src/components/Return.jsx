@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Return.css";
 import { collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "./Firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 export default function Return() {
@@ -11,12 +11,30 @@ export default function Return() {
   const [inputField, setInputField] = useState({
     name: "",
     productName: "",
-    productId: "",
     reason: "",
   });
 
   const navigate = useNavigate();
   let imageArr = [];
+
+  const {id} = useParams();
+
+  //updating document on database
+  const updateData = async (documentRef,updatedData) => {
+    try {
+      //adding customer return data
+      const doc = await updateDoc(documentRef,{customer: updatedData});
+
+      //updating status
+      const statusUpdate = { 'product.status': 'pending','product.return':true };
+
+      const update = updateDoc(documentRef,statusUpdate);
+      return Promise.all(update,doc);
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   //upload filles to cloud
   const handleFileUpload = async (file) => {
@@ -45,28 +63,21 @@ export default function Return() {
 
     const collectionRef = collection(db, "products");
     // document with custom ID
-    const mainDocRef = doc(collectionRef, inputField.productId);
+    const mainDocRef = doc(collectionRef, id);
 
     const { ...updateImages } = imageArr;
     //updating image paths
     const updatedReturn = {
       ...inputField,
+      productId:id,
       images: updateImages,
     };
     // Add document to the subcollection
     console.log(updatedReturn);
 
-    // Add document to the subcollection
-    updateDoc(mainDocRef, {
-      customer: updatedReturn,
-    })
-      .then(() => {
-        navigate('/customer');
-        console.log("Document updated successfully!");
-      })
-      .catch((error) => {
-        console.error("Error updating document: ", error);
-      });
+    await updateData(mainDocRef,updatedReturn);
+
+    navigate('/customer');
   };
 
   const handleChange = (e) => {
@@ -125,7 +136,8 @@ export default function Return() {
               name="productId"
               required
               onChange={handleChange}
-              value={inputField.productId}
+              value={id}
+              disabled
             />
           </div>
           <div className="product-group product-return-image">

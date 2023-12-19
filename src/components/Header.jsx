@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +7,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { auth } from "./Firebase";
 import { signOut } from "firebase/auth";
+import { LoginContext } from "../Context/Context";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -18,9 +19,10 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  const { account, setAccount } = useContext(LoginContext);
   const navigate = useNavigate();
-  //user logout
 
+  //user logout
   const handleLogout = () => {
     handleClose();
 
@@ -66,7 +68,7 @@ export default function Header() {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>{account?account.data.Name:"Profile"}</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </p>

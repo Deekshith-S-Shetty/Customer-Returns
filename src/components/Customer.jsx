@@ -12,8 +12,6 @@ export default function Customer() {
     // do cancel
   };
 
-  console.log(account?true:false);
-
   return (
     <div className="orders">
       <div className="customer-products">
@@ -42,7 +40,7 @@ export default function Customer() {
                   </button>
                 ) : (
                   <Link
-                    to={"/customer/return"}
+                    to={`/customer/return/${data.product.productId}`}
                     style={{ textDecoration: "none" }}
                   >
                     <button className="customer-return-btn">Return</button>

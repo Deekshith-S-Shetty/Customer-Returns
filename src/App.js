@@ -36,11 +36,11 @@ function App() {
 
   const fetchData = async (documentRef,itemsArr) => {
     try {
-      // Assuming documentRef is defined somewhere in your code
+      // getting doc data
       const doc = await getDoc(documentRef);
       const documentData = doc.data();
   
-      // Assuming getUrl is defined somewhere in your code
+      // calling getUrl for downloadable url
       const path = await getUrl(documentData.product.image);
       documentData.product.image = path;
   
@@ -125,7 +125,7 @@ function App() {
             }
           />
           <Route
-            path="return"
+            path="return/:id"
             element={
               <>
                 <Header />
