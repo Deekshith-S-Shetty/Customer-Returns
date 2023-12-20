@@ -29,9 +29,15 @@ const manufacturerRef = collection(db, "manufacturer");
 const manufacturerSnapshot = await getDocs(manufacturerRef);
 const manufacturerArray = manufacturerSnapshot.docs.map((doc) => doc.id);
 
+//Manufacturer reference
+const deliveryRef = collection(db, "admin");
+const deliverySnapshot = await getDocs(deliveryRef);
+const deliveryArray = deliverySnapshot.docs.map((doc) => doc.id);
+
 export {
   db,
   auth,
   customerArray,
   manufacturerArray,
+  deliveryArray,
 };

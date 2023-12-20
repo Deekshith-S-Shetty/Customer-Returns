@@ -10,7 +10,12 @@ import Admin from "./components/Admin";
 import Header from "./components/Header";
 import "./App.css";
 import { useContext, useEffect } from "react";
-import { auth, customerArray, manufacturerArray } from "./components/Firebase";
+import {
+  auth,
+  customerArray,
+  deliveryArray,
+  manufacturerArray,
+} from "./components/Firebase";
 import { LoginContext } from "./Context/Context";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./components/Firebase";
@@ -65,9 +70,11 @@ function App() {
     } else if (manufacturerArray.includes(authUser.uid)) {
       userType = "manufacturer";
       userArr = "product";
-    } else {
+    } else if (deliveryArray.includes(authUser.uid)) {
       userType = "delivery";
       userArr = "deliver";
+    } else {
+      userType = "admin";
     }
 
     // Reference to the document
@@ -76,7 +83,7 @@ function App() {
     // Fetch the document
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
+    if (docSnap.exists() && userType !== "admin") {
       try {
         const promises = Object.entries(docSnap.data()[userArr]).map(
           async ([key, value]) => {
@@ -89,10 +96,13 @@ function App() {
         await Promise.all(promises);
 
         setAccount({ data: docSnap.data(), item: itemsArr });
+
       } catch (error) {
         setAccount({ data: docSnap.data() });
         console.error("Error fetching document: ", error);
       }
+    } else if (docSnap.exists() && userType === "admin") {
+      setAccount({ data: docSnap.data() });
     } else {
       console.log("error");
       alert("Somewent wrong please try again");
@@ -108,7 +118,7 @@ function App() {
         findUserData(authUser);
       } else {
         setAccount("");
-        navigate('/');
+        // navigate("/");
         console.log("error");
       }
     });
