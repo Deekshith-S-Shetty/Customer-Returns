@@ -8,7 +8,7 @@ import { db } from "./Firebase";
 
 export default function Customer() {
   const { account, setAccount } = useContext(LoginContext);
-  console.log(account);
+  // console.log(account);
 
   const handleCancel = (productId) => {
     const collectionRef = collection(db, "products");

@@ -24,7 +24,7 @@ function App() {
   const navigate = useNavigate();
 
   // get image url
-  const getUrl = async(filePath) => {
+  const getUrl = async (filePath) => {
     try {
       const storage = getStorage();
       const fileRef = ref(storage, filePath);
@@ -32,39 +32,42 @@ function App() {
       return url;
     } catch (error) {
       console.error("Error getting download URL:", error);
-      throw error; 
+      throw error;
     }
   };
 
-  const fetchData = async (documentRef,itemsArr) => {
+  const fetchData = async (documentRef, itemsArr) => {
     try {
       // getting doc data
       const doc = await getDoc(documentRef);
       const documentData = doc.data();
-  
+
       // calling getUrl for downloadable url
       const path = await getUrl(documentData.product.image);
       documentData.product.image = path;
-  
+
       itemsArr.push(documentData);
     } catch (error) {
       console.error(error);
     }
   };
-  
 
   //finding Userdata
   const findUserData = async (authUser) => {
     let userType;
+    let userArr;
     let itemsArr = [];
 
     //find user type based on ID
     if (customerArray.includes(authUser.uid)) {
       userType = "customer";
+      userArr = "orders";
     } else if (manufacturerArray.includes(authUser.uid)) {
       userType = "manufacturer";
+      userArr = "product";
     } else {
       userType = "delivery";
+      userArr = "deliver";
     }
 
     // Reference to the document
@@ -75,14 +78,16 @@ function App() {
 
     if (docSnap.exists()) {
       try {
-        const promises = Object.entries(docSnap.data().orders).map(async ([key, value]) => {
-          const documentRef = doc(db, "products", value);
-          await fetchData(documentRef,itemsArr);
-        });
-  
+        const promises = Object.entries(docSnap.data()[userArr]).map(
+          async ([key, value]) => {
+            const documentRef = doc(db, "products", value);
+            await fetchData(documentRef, itemsArr);
+          }
+        );
+
         // Wait for all promises to resolve before updating items
         await Promise.all(promises);
-  
+
         setAccount({ data: docSnap.data(), item: itemsArr });
       } catch (error) {
         setAccount({ data: docSnap.data() });

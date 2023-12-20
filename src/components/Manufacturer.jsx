@@ -59,15 +59,15 @@ export default function Manufacturer() {
     console.log(updatedManufacturing);
 
     updateDoc(mainDocRef, {
-      manufacturer:updatedManufacturing
+      manufacturer: updatedManufacturing,
     })
-  .then(() => {
-    navigate('/manufacturer');
-    console.log('Document updated successfully!');
-  })
-  .catch((error) => {
-    console.error('Error updating document: ', error);
-  });
+      .then(() => {
+        navigate("/manufacturer");
+        console.log("Document updated successfully!");
+      })
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+      });
   };
 
   //handle change in input

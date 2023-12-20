@@ -6,31 +6,47 @@ import { CircularProgress } from "@mui/material";
 const DeliveryHome = () => {
   const { account, setAccount } = useContext(LoginContext);
   const navigate = useNavigate();
+  // console.log(account);
 
   return (
     <div className="delivery-home">
       <div className="delivered-products">
         <h2 className="delivery-heading">Deliveries</h2>
         {account ? (
-          <>
-            <div className="product">
+          account.item.map((data, index) => (
+            <div className="product" key={index}>
               <div className="product-image">
-                <img src="/laptop.jpg" alt="laptop" className="product-image" />
+                <img src={data.product.image} alt="laptop" className="product-image" />
               </div>
               <div className="product-info">
-                <p className="product-id">Product is is id</p>
-                <p className="product-name">Address</p>
-                <p className="product-status">Product status: status</p>
+                <p className="product-id">
+                  <b>Product Id:</b> &nbsp;&nbsp;{data.product.productId}
+                </p>
+                <p className="product-name">
+                  <b>Shipping Address:</b> &nbsp;&nbsp;{data.delivery.shipping}
+                </p>
+                <p className="product-status">
+                  {" "}
+                  <b>Status:</b> &nbsp;
+                  <span className={`${data.product.status}`}>
+                    <span className="point"></span> {data.product.status}
+                  </span>
+                </p>
               </div>
             </div>
-            <button className="delivery-btn" onClick={()=>navigate('/delivery/deliver')} >Add Delivery</button>
-          </>
+          ))
         ) : (
           <div className="circle" style={{ cursor: "progress" }}>
             <CircularProgress />
             <h2> Loading....</h2>
           </div>
         )}
+        <button
+          className="delivery-btn"
+          onClick={() => navigate("/delivery/deliver")}
+        >
+          Add Delivery
+        </button>
       </div>
     </div>
   );
