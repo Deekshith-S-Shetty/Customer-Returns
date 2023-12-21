@@ -2,13 +2,25 @@ import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "./Firebase";
-import "./review.css";
+import "./Styles/review.css";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { CircularProgress } from "@mui/material";
 
 const AdminReview = () => {
   const [imgData, setImgData] = useState("");
+  const [formItem, setFormItem] = useState(false);
+  const [inputField, setInputField] = useState("");
   const { id } = useParams();
+
+  const handleApprove = () => {};
+
+  const handleCancel = () => {
+    setFormItem(!formItem);
+  };
+
+  const handleChange = (e) => {
+    setInputField(e.target.value);
+  };
 
   // get image url
   const getUrl = async (filePath) => {
@@ -65,7 +77,7 @@ const AdminReview = () => {
                 Object.entries(imgData.manufacturer.images).map(
                   ([key, value]) => (
                     <img
-                    key={key} 
+                      key={key}
                       src={value}
                       alt="laptop"
                       className="review-product-image"
@@ -80,7 +92,7 @@ const AdminReview = () => {
               {imgData.delivery &&
                 Object.entries(imgData.delivery.images).map(([key, value]) => (
                   <img
-                  key={key} 
+                    key={key}
                     src={value}
                     alt="laptop"
                     className="review-product-image"
@@ -94,13 +106,37 @@ const AdminReview = () => {
               {imgData.customer &&
                 Object.entries(imgData.customer.images).map(([key, value]) => (
                   <img
-                  key={key} 
+                    key={key}
                     src={value}
                     alt="laptop"
                     className="review-product-image"
                   />
                 ))}
             </div>
+          </div>
+          <div className="review-processbox">
+            <button onClick={handleApprove}>Approve </button>
+            <button onClick={() => setFormItem(!formItem)}>Reject </button>
+            {formItem && (
+              <form onSubmit={handleCancel}>
+                <div className="delivery-desc">
+                  <div className="delivery-desc-header">
+                    <h3>Remark</h3>
+                  </div>
+                  <textarea
+                    rows={9}
+                    className="delivery-desc-text"
+                    placeholder="Enter the Details"
+                    name="details"
+                    value={inputField}
+                    onChange={handleChange}
+                    required
+                  />
+                  <button type="reset" onClick={()=>setFormItem(!formItem)}>Cancel</button>
+                  <button type="submit">Submit</button>
+                </div>
+              </form>
+            )}
           </div>
         </>
       ) : (

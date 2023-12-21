@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./Customer.css";
+import "./Styles/Customer.css";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../Context/Context";
 import { CircularProgress } from "@mui/material";

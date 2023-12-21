@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Delivery.css";
+import "./Styles/Delivery.css";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "./Firebase";

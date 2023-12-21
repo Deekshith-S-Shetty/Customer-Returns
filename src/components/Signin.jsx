@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, customerArray, db, manufacturerArray } from "./Firebase";
-import "./signup_signin.css";
+import "./Styles/signup_signin.css";
 import { doc, getDoc } from "firebase/firestore";
 import { LoginContext } from "../Context/Context";
 

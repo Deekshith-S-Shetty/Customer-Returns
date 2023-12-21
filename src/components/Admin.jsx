@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Admin.css";
+import "./Styles/Admin.css";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./Firebase";

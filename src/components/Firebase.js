@@ -30,7 +30,7 @@ const manufacturerSnapshot = await getDocs(manufacturerRef);
 const manufacturerArray = manufacturerSnapshot.docs.map((doc) => doc.id);
 
 //Manufacturer reference
-const deliveryRef = collection(db, "admin");
+const deliveryRef = collection(db, "delivery");
 const deliverySnapshot = await getDocs(deliveryRef);
 const deliveryArray = deliverySnapshot.docs.map((doc) => doc.id);
 

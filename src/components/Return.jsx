@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Return.css";
+import "./Styles/Return.css";
 import { collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "./Firebase";
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,7 +26,7 @@ export default function Return() {
       await updateDoc(documentRef,{customer: updatedData});
 
       //updating status
-      const statusUpdate = { 'product.status': 'pending','product.return':true };
+      const statusUpdate = { 'product.status': 'Requested for return','product.return':true };
 
       await Promise.all([
         updateDoc(documentRef, statusUpdate)

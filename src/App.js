@@ -76,7 +76,7 @@ function App() {
     } else {
       userType = "admin";
     }
-
+    console.log(authUser);
     // Reference to the document
     const docRef = doc(db, userType, authUser.uid);
 
@@ -96,7 +96,6 @@ function App() {
         await Promise.all(promises);
 
         setAccount({ data: docSnap.data(), item: itemsArr });
-
       } catch (error) {
         setAccount({ data: docSnap.data() });
         console.error("Error fetching document: ", error);
