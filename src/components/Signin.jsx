@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, customerArray, db, manufacturerArray } from "./Firebase";
+import { auth, customerArray, db, deliveryArray, manufacturerArray } from "./Firebase";
 import "./Styles/signup_signin.css";
 import { doc, getDoc } from "firebase/firestore";
 import { LoginContext } from "../Context/Context";
@@ -26,10 +26,11 @@ export default function Signin() {
         else if(manufacturerArray.includes(authUser.user.uid)){
           userType = "manufacturer";
         }
-        else{
+        else if (deliveryArray.includes(authUser.uid)) {
           userType = "delivery";
+        } else {
+          userType = "admin";
         }
-
         const docRef = doc(db, userType, authUser.user.uid);
 
         // Fetch the document

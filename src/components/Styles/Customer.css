@@ -124,6 +124,10 @@
   background-color: rgb(236, 17, 17);
 }
 
+button:disabled, button[disabled]{
+  cursor: not-allowed;
+}
+
 .circle {
   margin: 0 100px;
   border: none;

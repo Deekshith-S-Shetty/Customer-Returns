@@ -117,7 +117,7 @@ function App() {
         findUserData(authUser);
       } else {
         setAccount("");
-        // navigate("/");
+        navigate("/");
         console.log("error");
       }
     });
