@@ -1,6 +1,6 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { db } from "./Firebase";
 import "./Styles/review.css";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
@@ -11,11 +11,37 @@ const AdminReview = () => {
   const [formItem, setFormItem] = useState(false);
   const [inputField, setInputField] = useState("");
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const handleApprove = () => {};
+  const handleApprove = async() => {
+    try {
+      //updating status
+      const statusUpdate = { 'product.status': 'Return initiated','product.return':false };
 
-  const handleCancel = () => {
+      const documentRef = doc(db, "products", id);
+      
+      await updateDoc(documentRef, statusUpdate);
+      navigate('/admin');
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCancel = async() => {
     setFormItem(!formItem);
+    try {
+      //updating status
+      const statusUpdate = { 'product.status': 'Return rejected','product.return':false,'product.remark':'We regret to inform data available with us and your description is not matching' };
+
+      const documentRef = doc(db, "products", id);
+      
+      await updateDoc(documentRef, statusUpdate);
+      navigate('/admin');
+
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleChange = (e) => {

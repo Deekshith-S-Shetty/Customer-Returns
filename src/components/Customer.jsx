@@ -60,10 +60,16 @@ export default function Customer() {
                     <span className="point"></span> {data.product.status}
                   </span>
                 </p>
-                {data.product.return ? (
+                {data.product?.remark && (
+                  <p className="customer-product-price">
+                    {data.product.remark}
+                  </p>
+                )}
+                {data.product.return || data.product.status !== 'delivered'? (
                   <button
                     className="customer-return-btn cancel"
                     onClick={() => handleCancel(data.product.productId)}
+                    disabled={data.product.status !== 'Requested for return'}
                   >
                     Cancel return
                   </button>

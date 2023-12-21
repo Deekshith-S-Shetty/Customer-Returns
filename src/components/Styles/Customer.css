@@ -112,6 +112,10 @@
   background-color: rgb(241, 61, 61);
 }
 
+.Return{
+  color: rgb(0, 211, 169);
+}
+
 .return-btn:hover {
   background-color: #22b7f2;
 }
