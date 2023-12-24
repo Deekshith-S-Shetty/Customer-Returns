@@ -76,7 +76,7 @@ function App() {
     } else {
       userType = "admin";
     }
-    console.log(authUser);
+
     // Reference to the document
     const docRef = doc(db, userType, authUser.uid);
 

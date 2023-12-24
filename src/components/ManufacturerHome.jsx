@@ -28,8 +28,8 @@ const ManufacturerHome = () => {
                 <p className="product-status">
                   {" "}
                   <b>Status:</b> &nbsp;
-                  <span className={`${data.product.status}`}>
-                    <span className="point"></span> {data.product.status}
+                  <span className={`${data.manufacturer.status}`}>
+                    <span className="point"></span> {data.manufacturer.status}
                   </span>
                 </p>
               </div>

@@ -73,7 +73,7 @@
   width: 150px;
 }
 
-.delivered {
+.delivered ,.Return{
   color: rgb(0, 211, 169);
 }
 
@@ -104,28 +104,25 @@
   }
 }
 
-.pending {
+.Requested {
   color: orange;
 }
 
 .cancel {
-  background-color: rgb(241, 61, 61);
-}
-
-.Return{
-  color: rgb(0, 211, 169);
+  background-color: rgb(220, 42, 42);
 }
 
 .return-btn:hover {
   background-color: #22b7f2;
 }
 
-.cancel:hover {
+.cancel:hover:not(button:disabled) {
   background-color: rgb(236, 17, 17);
 }
 
 button:disabled, button[disabled]{
   cursor: not-allowed;
+  background-color: rgb(224, 71, 71);
 }
 
 .circle {

@@ -13,32 +13,40 @@ const AdminReview = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const handleApprove = async() => {
+  const handleApprove = async () => {
     try {
       //updating status
-      const statusUpdate = { 'product.status': 'Return initiated','product.return':false };
+      const statusUpdate = {
+        "product.status": "Return initiated",
+        "product.return": false,
+        "delivery.status": "Pickup return",
+        "manufacturer.status": "Return accepted",
+      };
 
       const documentRef = doc(db, "products", id);
-      
-      await updateDoc(documentRef, statusUpdate);
-      navigate('/admin');
 
+      await updateDoc(documentRef, statusUpdate);
+      navigate("/admin");
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleCancel = async() => {
+  const handleCancel = async () => {
     setFormItem(!formItem);
     try {
       //updating status
-      const statusUpdate = { 'product.status': 'Return rejected','product.return':false,'product.remark':'We regret to inform data available with us and your description is not matching' };
+      const statusUpdate = {
+        "product.status": "Return rejected",
+        "product.return": false,
+        "product.remark":
+          "We regret to inform data available with us and your description is not matching",
+      };
 
       const documentRef = doc(db, "products", id);
-      
-      await updateDoc(documentRef, statusUpdate);
-      navigate('/admin');
 
+      await updateDoc(documentRef, statusUpdate);
+      navigate("/admin");
     } catch (error) {
       console.error(error);
     }
@@ -158,7 +166,9 @@ const AdminReview = () => {
                     onChange={handleChange}
                     required
                   />
-                  <button type="reset" onClick={()=>setFormItem(!formItem)}>Cancel</button>
+                  <button type="reset" onClick={() => setFormItem(!formItem)}>
+                    Cancel
+                  </button>
                   <button type="submit">Submit</button>
                 </div>
               </form>

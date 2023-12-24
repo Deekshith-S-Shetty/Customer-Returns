@@ -26,7 +26,7 @@ export default function Signin() {
         else if(manufacturerArray.includes(authUser.user.uid)){
           userType = "manufacturer";
         }
-        else if (deliveryArray.includes(authUser.uid)) {
+        else if (deliveryArray.includes(authUser.user.uid)) {
           userType = "delivery";
         } else {
           userType = "admin";

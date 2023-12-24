@@ -75,6 +75,10 @@
   width: 250px;
 }
 
+.accepted{
+  color: orange;
+}
+
 /* manufacturer details page styling */
 .manufacture {
   color: white;

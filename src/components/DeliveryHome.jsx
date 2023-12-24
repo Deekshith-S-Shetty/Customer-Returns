@@ -28,8 +28,8 @@ const DeliveryHome = () => {
                 <p className="product-status">
                   {" "}
                   <b>Status:</b> &nbsp;
-                  <span className={`${data.product.status}`}>
-                    <span className="point"></span> {data.product.status}
+                  <span className={`${data.delivery.status}`}>
+                    <span className="point"></span> {data.delivery.status}
                   </span>
                 </p>
               </div>
