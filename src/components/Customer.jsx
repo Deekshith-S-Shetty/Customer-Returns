@@ -61,7 +61,7 @@ export default function Customer() {
                   </span>
                 </p>
                 {data.product?.remark && (
-                  <p className="customer-product-price">
+                  <p className="customer-product-remark">
                     {data.product.remark}
                   </p>
                 )}
