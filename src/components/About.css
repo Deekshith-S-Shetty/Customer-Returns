@@ -1,0 +1,41 @@
+.mission,
+.vision {
+  display: flex;
+  flex-direction: row;
+  margin: 75px 0;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+}
+
+.mission {
+  margin-left: 150px;
+  margin-right: 300px;
+}
+
+.vision {
+  margin-left: 300px;
+  margin-right: 150px;
+}
+
+.mission-box {
+  margin-left: 50px;
+  font-size: 1.2rem;
+}
+
+.vision-box {
+  margin-right: 50px;
+  font-size: 1.2rem;
+}
+
+.mission-header,
+.vision-header {
+  font-size: 2rem;
+  text-decoration: underline;
+  margin-bottom: 15px;
+}
+
+img {
+  width: 300px;
+  border-radius: 5px;
+}

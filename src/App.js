@@ -8,8 +8,10 @@ import Manufacturer from "./components/Manufacturer";
 import Delivery from "./components/Delivery";
 import Admin from "./components/Admin";
 import Header from "./components/Header";
+import About from "./components/About";
+import Contact from "./components/Contact";
 import "./App.css";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { auth, customerArray, manufacturerArray } from "./components/Firebase";
 import { LoginContext } from "./Context/Context";
 import { doc, getDocs, collection, getDoc } from "firebase/firestore";
@@ -23,19 +25,16 @@ function App() {
       console.log("The user is : ", authUser?.email);
 
       if (authUser) {
-
         let userType;
         //find user type based on ID
-        if(customerArray.includes(authUser.uid)){
+        if (customerArray.includes(authUser.uid)) {
           userType = "customer";
-        }
-        else if(manufacturerArray.includes(authUser.uid)){
+        } else if (manufacturerArray.includes(authUser.uid)) {
           userType = "manufacturer";
-        }
-        else{
+        } else {
           userType = "delivery";
         }
-        
+
         // Reference to the document
         const docRef = doc(db, userType, authUser.uid);
 
@@ -58,7 +57,6 @@ function App() {
               data: docSnap.data(),
               return: subcollectionDataArray,
             });
-            
           } catch (error) {
             setAccount({ data: docSnap.data() });
             console.error("Error fetching document: ", error);
@@ -112,7 +110,7 @@ function App() {
           }
         />
         <Route
-          path="/Delivery"
+          path="/delivery"
           element={
             <>
               <Header />
@@ -121,11 +119,29 @@ function App() {
           }
         />
         <Route
-          path="/Admin"
+          path="/admin"
           element={
             <>
               <Header />
               <Admin />
+            </>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <>
+              <Header />
+              <About />
+            </>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <>
+              <Header />
+              <Contact />
             </>
           }
         />
