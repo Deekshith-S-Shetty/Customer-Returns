@@ -6,8 +6,7 @@ import "./signup_signin.css";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function Signin() {
-  const [input, setInput] = useState({ userName: "", password: ""});
-  const [userType,setUserType] = useState("customer");
+  const [input, setInput] = useState({ userName: "", password: "" });
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -15,16 +14,13 @@ export default function Signin() {
 
     auth
       .signInWithEmailAndPassword(input.userName, input.password)
-      .then(async(authUser) => {
-
+      .then(async (authUser) => {
         let userType;
-        if(customerArray.includes(authUser.user.uid)){
+        if (customerArray.includes(authUser.user.uid)) {
           userType = "customer";
-        }
-        else if(manufacturerArray.includes(authUser.user.uid)){
+        } else if (manufacturerArray.includes(authUser.user.uid)) {
           userType = "manufacturer";
-        }
-        else{
+        } else {
           userType = "delivery";
         }
 

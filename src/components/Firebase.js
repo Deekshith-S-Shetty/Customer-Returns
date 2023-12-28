@@ -36,9 +36,4 @@ const manufacturerArray = manufacturerSnapshot.docs.map((doc) => doc.id);
 //   id: doc.id,
 // }));
 
-export {
-  db,
-  auth,
-  customerArray,
-  manufacturerArray,
-};
+export { db, auth, customerArray, manufacturerArray };

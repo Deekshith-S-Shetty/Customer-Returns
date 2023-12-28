@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "./Firebase";
 import "./signup_signin.css";
 import { collection, setDoc, doc } from "firebase/firestore";
-import { LoginContext } from "../Context/Context";
 
 export default function Signup() {
   const [input, setInput] = useState({
@@ -15,13 +14,6 @@ export default function Signup() {
     cpassword: "",
   });
 
-  const collections = {
-    delivery: "delivery",
-    manufacturer: "manufacturer",
-    customer: "customer",
-  };
-
-  const { account, setAccount } = useContext(LoginContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -115,12 +107,28 @@ export default function Signup() {
                 <label>Confirm Password</label>
               </div>
               <div className="input-container">
-                <select name="user" id="user-select" required>
+                <select
+                  name="userType"
+                  onChange={handleChange}
+                  id="user-select"
+                  required
+                >
                   <option value="customer">Customer</option>
                   <option value="manufacturer">Manufacturer</option>
                   <option value="delivery">Delivery</option>
                 </select>
               </div>
+              {input.userType === "manufacturer" && (
+                <div className="input-container">
+                  <input
+                    type="text"
+                    placeholder="Enter GST Numbber"
+                    name="gstNumber"
+                    required
+                  />
+                  <label>GST Number</label>
+                </div>
+              )}
               <button type="submit" className="btn-2">
                 Sign Up
               </button>

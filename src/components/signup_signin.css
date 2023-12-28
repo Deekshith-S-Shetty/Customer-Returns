@@ -88,6 +88,7 @@ select {
   border: none;
   padding: 10px 5px;
   outline: none;
+  margin-left: -5px;
 }
 
 .input-container input::placeholder {
