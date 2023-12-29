@@ -45,25 +45,25 @@ export default function Customer() {
                 />
               </div>
               <div className="customer-product-info">
-                <p className="customer-product-name">
+                <p className="customer-product-name cu-product-info">
                   <b>Product Name:</b> &nbsp;&nbsp;{data.product.name}
                 </p>
-                <p className="customer-product-id">
+                <p className="customer-product-id cu-product-info">
                   <b>Product Id:</b> &nbsp;&nbsp;{data.product.productId}
                 </p>
-                <p className="customer-product-price">
+                <p className="customer-product-price cu-product-info">
                   <b>Price:</b> &nbsp;&nbsp;{data.product.price}
                 </p>
-                <p className="customer-product-status">
+                <p className="customer-product-status cu-product-info">
                   <b>Status:</b> &nbsp;
                   <span className={`${data.product.status}`}>
                     <span className="point"></span> {data.product.status}
                   </span>
                 </p>
                 {data.product?.remark && (
-                  <p className="customer-product-remark">
+                  <span className="customer-product-remark cu-product-info">
                     {data.product.remark}
-                  </p>
+                  </span>
                 )}
                 {data.product.return || data.product.status !== "delivered" ? (
                   <button
