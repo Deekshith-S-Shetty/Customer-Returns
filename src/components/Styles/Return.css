@@ -19,7 +19,7 @@
 .return-product-info {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   margin: 50px 200px;
   padding: 25px 30px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
@@ -38,6 +38,7 @@
 
 .product-group {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 25px;
 }
 
@@ -45,6 +46,7 @@
   font-weight: bold;
   flex-basis: 30%;
   padding: 8px;
+  white-space: nowrap;
 }
 
 .product-group input {
@@ -132,4 +134,26 @@
 
 #return-submit-btn:hover {
   background-color: #22b7f2;
+}
+
+@media only screen and (max-width: 957px) {
+  .product-group {
+    flex-direction: column;
+  }
+
+  .product-group input {
+    padding: 6px;
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 394px) {
+  .return-product-info {
+    padding: 30px 15px;
+  }
+
+  #product-info-header {
+    font-size: 1.5rem;
+    width: 240px;
+  }
 }

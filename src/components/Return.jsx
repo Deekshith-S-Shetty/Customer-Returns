@@ -17,21 +17,21 @@ export default function Return() {
   const navigate = useNavigate();
   let imageArr = [];
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   //updating document on database
-  const updateData = async (documentRef,updatedData) => {
+  const updateData = async (documentRef, updatedData) => {
     try {
       //adding customer return data
-      await updateDoc(documentRef,{customer: updatedData});
+      await updateDoc(documentRef, { customer: updatedData });
 
       //updating status
-      const statusUpdate = { 'product.status': 'Requested for return','product.return':true };
+      const statusUpdate = {
+        "product.status": "Requested for return",
+        "product.return": true,
+      };
 
-      await Promise.all([
-        updateDoc(documentRef, statusUpdate)
-      ]);
-      
+      await Promise.all([updateDoc(documentRef, statusUpdate)]);
     } catch (error) {
       console.error(error);
     }
@@ -70,15 +70,15 @@ export default function Return() {
     //updating image paths
     const updatedReturn = {
       ...inputField,
-      productId:id,
+      productId: id,
       images: updateImages,
     };
     // Add document to the subcollection
     console.log(updatedReturn);
 
-    await updateData(mainDocRef,updatedReturn);
+    await updateData(mainDocRef, updatedReturn);
 
-    navigate('/customer');
+    navigate("/customer");
   };
 
   const handleChange = (e) => {
@@ -106,7 +106,9 @@ export default function Return() {
     <div className="return-page">
       <div className="return-container">
         <form onSubmit={handleSubmit} className="return-product-info">
-          <h2 className="product-info-header">Product Information</h2>
+          <h2 className="product-info-header" id="product-info-header">
+            Product Information
+          </h2>
           <div className="product-group your-name">
             <label className="product-label">Enter Your Name</label>
             <input
