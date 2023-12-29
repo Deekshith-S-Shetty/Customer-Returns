@@ -108,6 +108,7 @@ function App() {
       console.log("error");
       alert("Somewent wrong please try again");
     }
+    return userType;
   };
 
   // track user auth status
@@ -116,7 +117,8 @@ function App() {
       console.log("The user is : ", authUser?.email);
 
       if (authUser) {
-        findUserData(authUser);
+        const route = await findUserData(authUser);
+        navigate(route);
       } else {
         setAccount("");
         navigate("/");

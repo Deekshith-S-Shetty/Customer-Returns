@@ -35,10 +35,19 @@ export default function Header() {
       });
   };
 
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const route = account.data ? account.data?.userType : "";
+    navigate("/" + route);
+  };
+
   return (
     <div className="header">
-      <Link to={"/"} style={{ textDecoration: "none", background: "none" }}>
-        <p className="header-item">Customer-Returns</p>
+      <Link style={{ textDecoration: "none", background: "none" }}>
+        <p className="header-item" onClick={handleHomeClick}>
+          Customer-Returns
+        </p>
       </Link>
       <Link
         to={"/about"}
