@@ -71,7 +71,7 @@ export default function Delivery() {
       delivery: updatedDelivery,
     })
       .then(() => {
-        navigate('/delivery');
+        navigate("/delivery");
         console.log("Document updated successfully!");
       })
       .catch((error) => {
@@ -105,7 +105,9 @@ export default function Delivery() {
     <div className="delivery">
       <div className="delivery-container">
         <form onSubmit={handleSubmit} className="delivery-product-info">
-          <h2 className="product-info-header">Delivery Information</h2>
+          <h2 className="product-info-header" id="product-info-header">
+            Delivery Information
+          </h2>
           <div className="product-group delievery-name">
             <label className="product-label">Delivery Person Name</label>
             <input
