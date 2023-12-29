@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
@@ -8,64 +8,116 @@ import Manufacturer from "./components/Manufacturer";
 import Delivery from "./components/Delivery";
 import Admin from "./components/Admin";
 import Header from "./components/Header";
-import About from "./components/About";
-import Contact from "./components/Contact";
 import "./App.css";
 import { useContext, useEffect } from "react";
-import { auth, customerArray, manufacturerArray } from "./components/Firebase";
+import {
+  auth,
+  customerArray,
+  deliveryArray,
+  manufacturerArray,
+} from "./components/Firebase";
 import { LoginContext } from "./Context/Context";
-import { doc, getDocs, collection, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "./components/Firebase";
+import ManufacturerHome from "./components/ManufacturerHome";
+import DeliveryHome from "./components/DeliveryHome";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import AdminReview from "./components/AdminReview";
 
 function App() {
   const { account, setAccount } = useContext(LoginContext);
+  const navigate = useNavigate();
 
+  // get image url
+  const getUrl = async (filePath) => {
+    try {
+      const storage = getStorage();
+      const fileRef = ref(storage, filePath);
+      const url = await getDownloadURL(fileRef);
+      return url;
+    } catch (error) {
+      console.error("Error getting download URL:", error);
+      throw error;
+    }
+  };
+
+  const fetchData = async (documentRef, itemsArr) => {
+    try {
+      // getting doc data
+      const doc = await getDoc(documentRef);
+      const documentData = doc.data();
+
+      // calling getUrl for downloadable url
+      const path = await getUrl(documentData.product.image);
+      documentData.product.image = path;
+
+      itemsArr.push(documentData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //finding Userdata
+  const findUserData = async (authUser) => {
+    let userType;
+    let userArr;
+    let itemsArr = [];
+
+    //find user type based on ID
+    if (customerArray.includes(authUser.uid)) {
+      userType = "customer";
+      userArr = "orders";
+    } else if (manufacturerArray.includes(authUser.uid)) {
+      userType = "manufacturer";
+      userArr = "product";
+    } else if (deliveryArray.includes(authUser.uid)) {
+      userType = "delivery";
+      userArr = "deliver";
+    } else {
+      userType = "admin";
+    }
+
+    // Reference to the document
+    const docRef = doc(db, userType, authUser.uid);
+
+    // Fetch the document
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists() && userType !== "admin") {
+      try {
+        const promises = Object.entries(docSnap.data()[userArr]).map(
+          async ([key, value]) => {
+            const documentRef = doc(db, "products", value);
+            await fetchData(documentRef, itemsArr);
+          }
+        );
+
+        // Wait for all promises to resolve before updating items
+        await Promise.all(promises);
+
+        setAccount({ data: docSnap.data(), item: itemsArr });
+      } catch (error) {
+        setAccount({ data: docSnap.data() });
+        console.error("Error fetching document: ", error);
+      }
+    } else if (docSnap.exists() && userType === "admin") {
+      setAccount({ data: docSnap.data() });
+    } else {
+      console.log("error");
+      alert("Somewent wrong please try again");
+    }
+  };
+
+  // track user auth status
   useEffect(() => {
     auth.onAuthStateChanged(async (authUser) => {
       console.log("The user is : ", authUser?.email);
 
       if (authUser) {
-        let userType;
-        //find user type based on ID
-        if (customerArray.includes(authUser.uid)) {
-          userType = "customer";
-        } else if (manufacturerArray.includes(authUser.uid)) {
-          userType = "manufacturer";
-        } else {
-          userType = "delivery";
-        }
-
-        // Reference to the document
-        const docRef = doc(db, userType, authUser.uid);
-
-        // Fetch the document
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          try {
-            const subcollectionRef = collection(docRef, "return");
-
-            // Fetch documents from the subcollection
-            const subcollectionDocs = await getDocs(subcollectionRef);
-            const subcollectionDataArray = subcollectionDocs.docs.map(
-              (subDoc) => ({
-                id: subDoc.id,
-                data: subDoc.data(),
-              })
-            );
-            setAccount({
-              data: docSnap.data(),
-              return: subcollectionDataArray,
-            });
-          } catch (error) {
-            setAccount({ data: docSnap.data() });
-            console.error("Error fetching document: ", error);
-          }
-        } else {
-          console.log("No such document!");
-        }
+        findUserData(authUser);
       } else {
         setAccount("");
+        navigate("/");
         console.log("error");
       }
     });
@@ -90,7 +142,7 @@ function App() {
             }
           />
           <Route
-            path="return"
+            path="return/:id"
             element={
               <>
                 <Header />
@@ -100,51 +152,68 @@ function App() {
           />
         </Route>
 
-        <Route
-          path="/manufacturer"
-          element={
-            <>
-              <Header />
-              <Manufacturer />
-            </>
-          }
-        />
-        <Route
-          path="/delivery"
-          element={
-            <>
-              <Header />
-              <Delivery />
-            </>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <>
-              <Header />
-              <Admin />
-            </>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <>
-              <Header />
-              <About />
-            </>
-          }
-        />
-        <Route
-          path="/contact"
-          element={
-            <>
-              <Header />
-              <Contact />
-            </>
-          }
-        />
+        <Route path="/manufacturer">
+          <Route
+            index
+            element={
+              <>
+                <Header />
+                <ManufacturerHome />
+              </>
+            }
+          />
+          <Route
+            path="product"
+            element={
+              <>
+                <Header />
+                <Manufacturer />
+              </>
+            }
+          />
+        </Route>
+
+        <Route path="/delivery">
+          <Route
+            index
+            element={
+              <>
+                <Header />
+                <DeliveryHome />
+              </>
+            }
+          />
+          <Route
+            path="deliver"
+            element={
+              <>
+                <Header />
+                <Delivery />
+              </>
+            }
+          />
+        </Route>
+
+        <Route path="/Admin">
+          <Route
+            index
+            element={
+              <>
+                <Header />
+                <Admin />
+              </>
+            }
+          />
+          <Route
+            path="review/:id"
+            element={
+              <>
+                <Header />
+                <AdminReview />
+              </>
+            }
+          />
+        </Route>
       </Routes>
     </div>
   );

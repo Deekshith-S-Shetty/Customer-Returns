@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "./Firebase";
-import "./signup_signin.css";
+import "./Styles/signup_signin.css";
 import { collection, setDoc, doc } from "firebase/firestore";
+import { LoginContext } from "../Context/Context";
 
 export default function Signup() {
   const [input, setInput] = useState({
@@ -14,6 +15,7 @@ export default function Signup() {
     cpassword: "",
   });
 
+  const { account, setAccount } = useContext(LoginContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -54,6 +56,12 @@ export default function Signup() {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    if (account.data) {
+      navigate(`/${account.data.userType.toLowerCase()}`);
+    }
+  });
 
   return (
     <div>

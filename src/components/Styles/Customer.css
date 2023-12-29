@@ -13,7 +13,7 @@
   color: #55c2da;
 }
 
-.products {
+.customer-products {
   display: flex;
   flex-direction: column;
   padding: 40px;
@@ -32,7 +32,7 @@
   width: 224px;
 }
 
-.product {
+.customer-product {
   background-color: #080606ab;
   padding: 30px;
   display: flex;
@@ -41,27 +41,27 @@
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.product:hover {
+.customer-product:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
-.product-image {
+.customer-product-image {
   width: 300px;
   border-radius: 8px;
   margin-right: 50px;
 }
 
-.product-info {
+.customer-product-info {
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin: 40px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.return-btn {
+.customer-return-btn {
   margin-top: 20px;
   padding: 8px 15px;
   border-radius: 8px;
@@ -73,19 +73,68 @@
   width: 150px;
 }
 
-.cancel{
-  background-color: rgb(241, 61, 61);
+.delivered ,.Return{
+  color: rgb(0, 211, 169);
+}
+
+.point {
+  display:inline-block;
+  width: 0.62rem;
+  height: 0.62rem;
+  border: none;
+  border-radius: 50%;
+  background: rgb(0, 211, 169);
+  cursor: pointer;
+  box-shadow: rgba(0, 211, 169, 0.5) 0px 0px 0px 0px;
+  animation: 1.5s ease 0s infinite normal none running pulse;
+}
+
+.customer-product-remark{
+  color: orange;
+  font-size: .95rem;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.Requested {
+  color: orange;
+}
+
+.rejected{
+  color: rgb(220, 42, 42);
+}
+
+.cancel {
+  background-color: rgb(220, 42, 42);
 }
 
 .return-btn:hover {
   background-color: #22b7f2;
 }
 
-.cancel:hover{
+.cancel:hover:not(button:disabled) {
   background-color: rgb(236, 17, 17);
 }
 
-.circle{
+button:disabled, button[disabled]{
+  cursor: not-allowed;
+  background-color: rgb(224, 71, 71);
+}
+
+.circle {
   margin: 0 100px;
   border: none;
   height: 300px;

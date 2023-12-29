@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, customerArray, db, manufacturerArray } from "./Firebase";
-import "./signup_signin.css";
+import {
+  auth,
+  customerArray,
+  db,
+  deliveryArray,
+  manufacturerArray,
+} from "./Firebase";
+import "./Styles/signup_signin.css";
 import { doc, getDoc } from "firebase/firestore";
+import { LoginContext } from "../Context/Context";
 
 export default function Signin() {
   const [input, setInput] = useState({ userName: "", password: "" });
   const navigate = useNavigate();
+
+  const { account, setAccount } = useContext(LoginContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,10 +29,11 @@ export default function Signin() {
           userType = "customer";
         } else if (manufacturerArray.includes(authUser.user.uid)) {
           userType = "manufacturer";
-        } else {
+        } else if (deliveryArray.includes(authUser.user.uid)) {
           userType = "delivery";
+        } else {
+          userType = "admin";
         }
-
         const docRef = doc(db, userType, authUser.user.uid);
 
         // Fetch the document
@@ -44,6 +54,12 @@ export default function Signin() {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    if (account.data) {
+      navigate(`/${account.data.userType.toLowerCase()}`);
+    }
+  });
 
   return (
     <div className="auth-container">
