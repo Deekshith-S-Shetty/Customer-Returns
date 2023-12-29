@@ -35,7 +35,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   border-radius: 10px;
   margin: 30px 0;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -155,5 +154,11 @@ button[disabled] {
   .customer-product-image {
     max-width: 190px;
     margin: 0;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .customer-product {
+    justify-content: center;
   }
 }

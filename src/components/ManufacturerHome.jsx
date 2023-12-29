@@ -14,7 +14,7 @@ const ManufacturerHome = () => {
         <h2 className="manufacturer-heading">Products</h2>
         {account ? (
           account.item?.map((data, index) => (
-            <div className="product" key={index}>
+            <div className="manufacture-product" key={index}>
               <div className="product-image">
                 <img
                   src={data.product.image}
