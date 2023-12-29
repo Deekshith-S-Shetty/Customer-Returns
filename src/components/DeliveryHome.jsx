@@ -23,13 +23,13 @@ const DeliveryHome = () => {
                 />
               </div>
               <div className="product-info">
-                <p className="product-id">
+                <p className="product-id p-info">
                   <b>Product Id:</b> &nbsp;&nbsp;{data.product.productId}
                 </p>
-                <p className="product-name">
+                <p className="product-name p-info">
                   <b>Shipping Address:</b> &nbsp;&nbsp;{data.delivery.shipping}
                 </p>
-                <p className="product-status">
+                <p className="product-status p-info">
                   {" "}
                   <b>Status:</b> &nbsp;
                   <span className={`${data.delivery.status}`}>
