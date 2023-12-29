@@ -13,6 +13,7 @@
     rgba(20, 23, 33, 0.8) 100%
   );
   color: #55c2da;
+  min-height: 87vh;
 }
 
 .manufacturer-products {
@@ -75,7 +76,7 @@
   width: 250px;
 }
 
-.accepted{
+.accepted {
   color: orange;
 }
 

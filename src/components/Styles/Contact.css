@@ -5,7 +5,7 @@
       rgba(0, 0, 0, 0.25),
       rgba(0, 0, 0, 0.25)
     ),
-    url(../../public/contact.jpg);
+    url(../../../public/contact.jpg);
   background-position: 50% 50%;
   padding-bottom: 40px;
   min-height: 82vh;

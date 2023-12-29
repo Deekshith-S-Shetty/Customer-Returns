@@ -23,6 +23,8 @@ import ManufacturerHome from "./components/ManufacturerHome";
 import DeliveryHome from "./components/DeliveryHome";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import AdminReview from "./components/AdminReview";
+import About from "./components/About";
+import Contact from "./components/Contact";
 
 function App() {
   const { account, setAccount } = useContext(LoginContext);
@@ -214,6 +216,24 @@ function App() {
             }
           />
         </Route>
+        <Route
+          path="/about"
+          element={
+            <>
+              <Header />
+              <About />
+            </>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <>
+              <Header />
+              <Contact />
+            </>
+          }
+        />
       </Routes>
     </div>
   );

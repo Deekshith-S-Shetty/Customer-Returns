@@ -35,7 +35,7 @@ export default function Customer() {
       <div className="customer-products">
         <h2 className="orders-heading">YOUR ORDERS</h2>
         {account ? (
-          account.item.map((data, index) => (
+          account.item?.map((data, index) => (
             <div className="customer-product" key={index}>
               <div className="customer-product-image">
                 <img
@@ -65,11 +65,11 @@ export default function Customer() {
                     {data.product.remark}
                   </p>
                 )}
-                {data.product.return || data.product.status !== 'delivered'? (
+                {data.product.return || data.product.status !== "delivered" ? (
                   <button
                     className="customer-return-btn cancel"
                     onClick={() => handleCancel(data.product.productId)}
-                    disabled={data.product.status !== 'Requested for return'}
+                    disabled={data.product.status !== "Requested for return"}
                   >
                     Cancel return
                   </button>

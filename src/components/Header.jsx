@@ -37,7 +37,7 @@ export default function Header() {
 
   return (
     <div className="header">
-      <Link to={"/customer"} style={{ textDecoration: "none", background: "none" }}>
+      <Link to={"/"} style={{ textDecoration: "none", background: "none" }}>
         <p className="header-item">Customer-Returns</p>
       </Link>
       <Link
@@ -68,7 +68,9 @@ export default function Header() {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>{account?account.data.Name:"Profile"}</MenuItem>
+          <MenuItem onClick={handleClose}>
+            {account ? account.data.Name : "Profile"}
+          </MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </p>

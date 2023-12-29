@@ -13,6 +13,7 @@
     rgba(20, 23, 33, 0.8) 100%
   );
   color: #55c2da;
+  min-height: 87vh;
 }
 
 .delivered-products {
@@ -75,10 +76,9 @@
   width: 250px;
 }
 
-.Pickup{
+.Pickup {
   color: orange;
 }
-
 
 /* delivery details page styling */
 

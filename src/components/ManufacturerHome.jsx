@@ -13,17 +13,22 @@ const ManufacturerHome = () => {
       <div className="manufacturer-products">
         <h2 className="manufacturer-heading">Products</h2>
         {account ? (
-          account.item.map((data, index) => (
+          account.item?.map((data, index) => (
             <div className="product" key={index}>
               <div className="product-image">
-                <img src={data.product.image} alt="laptop" className="product-image" />
+                <img
+                  src={data.product.image}
+                  alt="laptop"
+                  className="product-image"
+                />
               </div>
               <div className="product-info">
                 <p className="product-id">
                   <b>Product Id:</b> &nbsp;&nbsp;{data.product.productId}
                 </p>
                 <p className="product-name">
-                  <b>Shipping Address:</b> &nbsp;&nbsp;{data.manufacturer.address}
+                  <b>Shipping Address:</b> &nbsp;&nbsp;
+                  {data.manufacturer.address}
                 </p>
                 <p className="product-status">
                   {" "}

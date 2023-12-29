@@ -11,6 +11,7 @@
     rgba(20, 23, 33, 0.8) 100%
   );
   color: #55c2da;
+  min-height: 87vh;
 }
 
 .customer-products {
@@ -73,12 +74,13 @@
   width: 150px;
 }
 
-.delivered ,.Return{
+.delivered,
+.Return {
   color: rgb(0, 211, 169);
 }
 
 .point {
-  display:inline-block;
+  display: inline-block;
   width: 0.62rem;
   height: 0.62rem;
   border: none;
@@ -89,9 +91,9 @@
   animation: 1.5s ease 0s infinite normal none running pulse;
 }
 
-.customer-product-remark{
+.customer-product-remark {
   color: orange;
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 @keyframes pulse {
@@ -113,7 +115,7 @@
   color: orange;
 }
 
-.rejected{
+.rejected {
   color: rgb(220, 42, 42);
 }
 
@@ -129,7 +131,8 @@
   background-color: rgb(236, 17, 17);
 }
 
-button:disabled, button[disabled]{
+button:disabled,
+button[disabled] {
   cursor: not-allowed;
   background-color: rgb(224, 71, 71);
 }
