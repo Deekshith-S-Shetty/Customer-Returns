@@ -18,7 +18,7 @@
   letter-spacing: 4px;
   font-weight: 600;
   margin: 0 auto 0;
-  width: 533px;
+  max-width: 533px;
   color: #404040;
   word-wrap: break-word;
   box-sizing: border-box;
@@ -26,7 +26,7 @@
 
 .contact-form {
   font-size: 1.2rem;
-  width: 533px;
+  max-width: 533px;
   background-image: none;
   box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.4);
   margin: 20px auto 0px;
@@ -87,4 +87,16 @@ textarea {
 
 .submit-btn:hover {
   background-color: rgb(35, 33, 33);
+}
+
+@media only screen and (max-width: 600px) {
+  .contact-header {
+    font-size: 2.5rem;
+    margin-left: 10px;
+  }
+
+  .contact-form {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }

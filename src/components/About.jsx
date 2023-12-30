@@ -6,21 +6,20 @@ export default function About() {
     <div className="about-container">
       <div className="mission">
         <div className="mission-image">
-          <img src="mission.jpeg" alt="Our Mission" />
+          <img className="about-image" src="mission.jpeg" alt="Our Mission" />
         </div>
         <div className="mission-box">
           <h2 className="mission-header">Our Mission</h2>
           <p className="mission-text">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam
-            maxime tempora nihil dolores amet ea exercitationem placeat hic
-            asperiores. Provident temporibus, quas sit velit quisquam unde optio
-            ratione? Ducimus, consequatur. Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Pariatur necessitatibus, minima
-            maiores non mollitia quam, consequuntur eum rem tempore dolores
-            magnam accusantium minus alias ratione nulla quas totam, cum
-            reprehenderit neque sit adipisci delectus. Necessitatibus sed a
-            beatae error minima, in tempora quisquam officia, ipsum,
-            reprehenderit modi. Voluptate, enim ut!
+            Our mission is to streamline and simplify the returns journey for
+            both customers and retailers, ensuring a hassle-free and efficient
+            process. By leveraging innovative technologies and customer-centric
+            strategies, we aim to eliminate the pain points associated with
+            returns, turning them into opportunities for positive engagement and
+            brand loyalty. We strive to empower businesses with insightful data
+            and analytics derived from returns, enabling them to make informed
+            decisions that enhance product quality, customer service, and
+            overall satisfaction.
           </p>
         </div>
       </div>
@@ -28,20 +27,16 @@ export default function About() {
         <div className="vision-box">
           <h2 className="vision-header">Our Vision</h2>
           <p className="vision-text">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam
-            maxime tempora nihil dolores amet ea exercitationem placeat hic
-            asperiores. Provident temporibus, quas sit velit quisquam unde optio
-            ratione? Ducimus, consequatur. Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Pariatur necessitatibus, minima
-            maiores non mollitia quam, consequuntur eum rem tempore dolores
-            magnam accusantium minus alias ratione nulla quas totam, cum
-            reprehenderit neque sit adipisci delectus. Necessitatibus sed a
-            beatae error minima, in tempora quisquam officia, ipsum,
-            reprehenderit modi. Voluptate, enim ut!
+            Our goal is to implement innovative solutions that streamline the
+            entire returns process, from initiation to resolution, ensuring
+            efficiency and transparency at every step. By leveraging
+            cutting-edge technology, data analytics, and customer feedback, we
+            aim to tailor the returns experience to individual preferences,
+            providing personalized solutions and enhancing overall satisfaction.
           </p>
         </div>
         <div className="vision-image">
-          <img src="vision.jpeg" alt="Our Vision" />
+          <img className="about-image" src="vision.jpeg" alt="Our Vision" />
         </div>
       </div>
     </div>
