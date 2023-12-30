@@ -96,7 +96,9 @@ export default function Manufacturer() {
     <div className="manufacture">
       <div className="manufacture-container">
         <form onSubmit={handleSubmit} className="manufacture-product-info">
-          <h2 className="product-info-header">Shipping Information</h2>
+          <h2 className="product-info-header" id="manufacture-info-header">
+            Shipping Information
+          </h2>
           <div className="product-group shipment-name">
             <label className="product-label">Enter Shipment Name</label>
             <input

@@ -116,7 +116,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 50px 200px;
+  margin: 50px 150px;
   padding: 25px 30px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
   border-radius: 10px;
@@ -228,4 +228,11 @@
 
 #manufacture-submit-btn:hover {
   background-color: #22b7f2;
+}
+
+@media only screen and (max-width: 415px) {
+  #manufacture-info-header {
+    font-size: 1.3rem;
+    width: 217px;
+  }
 }
