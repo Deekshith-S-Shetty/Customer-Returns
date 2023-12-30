@@ -1,5 +1,39 @@
+.header-container {
+  display: flex;
+  background: none;
+  color: #e8e8e8;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-image: linear-gradient(
+    75deg,
+    rgb(17, 18, 23) 0%,
+    rgb(20, 23, 33) 50%,
+    rgba(20, 23, 33, 0.8) 100%
+  );
+}
+
+.hamburger {
+  width: 2rem;
+  height: 1.6rem;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: column nowrap;
+  z-index: 5;
+  margin: 30px 30px;
+  display: none;
+}
+
+.burger {
+  width: 2rem;
+  height: 0.15rem;
+  border-radius: 10px;
+  background-color: white;
+  transform-origin: 1px;
+  transition: all 0.3s linear;
+}
+
 .header {
-  background-color: rgba(255, 255, 255, 0.8);
   background: none;
   color: #e8e8e8;
   display: flex;
@@ -21,6 +55,10 @@
   font-weight: bold;
   display: inline-block;
   position: relative;
+}
+
+#header-profile {
+  width: 21px;
 }
 
 .header-icon {
@@ -47,4 +85,56 @@
 .header-item:hover:after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+@media only screen and (max-width: 570px) {
+  .header-item {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .header-container {
+    justify-content: flex-start;
+  }
+
+  #display-ham {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    justify-self: flex-end;
+    align-self: flex-start;
+    z-index: 99999;
+    position: relative;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 50vw;
+    height: 50%;
+    z-index: 5;
+    padding-left: 100px;
+    border-radius: 18px;
+    padding-top: 50px;
+    background-color: black;
+    animation: slideInLeft 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 }

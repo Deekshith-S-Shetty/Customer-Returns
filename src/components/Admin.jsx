@@ -43,7 +43,7 @@ export default function Admin() {
           <div className="request-container">
             {productsArr.length ? (
               productsArr.map((data, index) => (
-                <div className="review-product" key={index}>
+                <div className="review-product" id="review-product" key={index}>
                   <div className="review-product-info">
                     <p className="review-product-name">
                       <b>Product Name:</b> &nbsp;&nbsp;{data.name}
@@ -57,7 +57,12 @@ export default function Admin() {
                         <span className="point"></span> {data.status}
                       </span>
                     </p>
-                    <button className="review-btn" onClick={() => navigate(`/admin/review/${data.productId}`)}>
+                    <button
+                      className="review-btn"
+                      onClick={() =>
+                        navigate(`/admin/review/${data.productId}`)
+                      }
+                    >
                       Review
                     </button>
                   </div>

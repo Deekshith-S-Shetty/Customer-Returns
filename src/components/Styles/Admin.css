@@ -49,7 +49,6 @@
 
 .right-header {
   font-size: 1.5rem;
-  margin-bottom: 18px;
   display: inline-block;
   padding: 5px;
   color: white;
@@ -76,7 +75,7 @@
 }
 
 .review-product:hover {
-  box-shadow:  #ffff 0px 0px 2px 0px;
+  box-shadow: #ffff 0px 0px 2px 0px;
 }
 
 .review-product-info {
@@ -96,7 +95,13 @@
   border: none;
   background-color: #57e3ab;
   color: black;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: bold;
-  width: 200px;
+  max-width: 200px;
+}
+
+@media only screen and (max-width: 410px) {
+  #review-product {
+    width: 85%;
+  }
 }
