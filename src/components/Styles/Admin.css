@@ -100,8 +100,23 @@
   max-width: 200px;
 }
 
-@media only screen and (max-width: 410px) {
+@media only screen and (max-width: 600px){
+  .left-container{
+    display: none;
+  }
+
+  .right-header {
+    text-align: center;
+    width: 100%;
+  }
+
   #review-product {
     width: 85%;
   }
+
+  #request-cnt {
+    display: flex;
+    justify-content: center;
+  }
+  
 }
