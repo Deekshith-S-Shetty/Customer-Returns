@@ -12,7 +12,7 @@
   color: #55c2da;
   min-height: 90vh;
   display: flex;
-  gap: 5px;
+  gap: 35px;
   flex-direction: column;
   overflow: auto;
 }
@@ -45,10 +45,78 @@
   float: right;
   display: flex;
   flex-direction: row;
-  gap: 5px;
+  gap: 15px;
 }
 
-.review-processbox{
+.review-processbox {
   width: 86%;
   height: 14rem;
+  margin-left: 30px;
+}
+
+.reason-customer{
+  float:right;
+  width: 85%;
+  padding: 5px;
+  margin-top: 3px;
+  color: orange;
+}
+
+.delivery-desc-header {
+  color: #55c2da;
+  font-size: 1rem;
+  border-bottom: 3px solid;
+  display: inline-block;
+  width: 70px;
+}
+
+.admin-review-approve {
+  margin-top: 20px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgb(0, 211, 169);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 100px;
+}
+
+.admin-review-reject {
+  margin-top: 20px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgb(220, 42, 42);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 100px;
+}
+
+.review-desc-text {
+  width: 70%;
+}
+
+.review-submit, .review-cancel {
+  margin-bottom: 5px;
+  color: #ebebeb;
+  outline: none;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  width: 70%;
+  background-color: rgb(22, 103, 76);
+}
+
+.review-cancel:hover,.review-submit:hover{
+  background-color: rgb(41, 154, 116);
+}
+
+@media only screen and (max-width: 750px){
+  .review-desc-text,.review-submit, .review-cancel {
+    width: 100%;
+  }
 }
