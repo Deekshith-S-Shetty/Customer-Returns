@@ -71,7 +71,7 @@ export default function Customer() {
                     onClick={() => handleCancel(data.product.productId)}
                     disabled={data.product.status !== "Requested for return"}
                   >
-                    Cancel return
+                   {data.product.status==="Return initiated"?"Return approved":"Cancel return"}
                   </button>
                 ) : (
                   <Link
