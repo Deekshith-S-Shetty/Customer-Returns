@@ -39,10 +39,9 @@ const AdminReview = () => {
       const statusUpdate = {
         "product.status": "Return rejected",
         "product.return": false,
-        "product.remark":
-          "We regret to inform data available with us and your description is not matching",
+        "product.remark": inputField,
       };
-
+      //"We regret to inform data available with us and your description is not matching"
       const documentRef = doc(db, "products", id);
 
       await updateDoc(documentRef, statusUpdate);
@@ -95,7 +94,7 @@ const AdminReview = () => {
 
     setImgData(documentData);
   };
-
+  console.log(imgData);
   useEffect(() => {
     getData(id);
   }, []);
@@ -147,10 +146,26 @@ const AdminReview = () => {
                   />
                 ))}
             </div>
+            <p className="reason-customer"><b style={{color:'red'}}>Reason:</b> {imgData.customer.reason}</p>
           </div>
           <div className="review-processbox">
-            <button onClick={handleApprove}>Approve </button>
-            <button onClick={() => setFormItem(!formItem)}>Reject </button>
+            {!formItem && (
+              <>
+                <button
+                  onClick={handleApprove}
+                  className="admin-review-approve"
+                >
+                  Approve{" "}
+                </button>{" "}
+                &nbsp;&nbsp;
+                <button
+                  onClick={() => setFormItem(!formItem)}
+                  className="admin-review-reject"
+                >
+                  Reject{" "}
+                </button>
+              </>
+            )}
             {formItem && (
               <form onSubmit={handleCancel}>
                 <div className="delivery-desc">
@@ -159,17 +174,23 @@ const AdminReview = () => {
                   </div>
                   <textarea
                     rows={9}
-                    className="delivery-desc-text"
-                    placeholder="Enter the Details"
+                    className="review-desc-text"
+                    placeholder="Enter the remark"
                     name="details"
                     value={inputField}
                     onChange={handleChange}
                     required
                   />
-                  <button type="reset" onClick={() => setFormItem(!formItem)}>
+                  <button
+                    type="reset"
+                    onClick={() => setFormItem(!formItem)}
+                    className="review-cancel"
+                  >
                     Cancel
                   </button>
-                  <button type="submit">Submit</button>
+                  <button type="submit" className="review-submit">
+                    Submit
+                  </button>
                 </div>
               </form>
             )}

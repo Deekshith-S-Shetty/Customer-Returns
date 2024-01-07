@@ -40,7 +40,7 @@ export default function Admin() {
       <div className="right-container">
         <div className="right-box">
           <h2 className="right-header">Return requests</h2>
-          <div className="request-container">
+          <div className="request-container" id="request-cnt">
             {productsArr.length ? (
               productsArr.map((data, index) => (
                 <div className="review-product" id="review-product" key={index}>
