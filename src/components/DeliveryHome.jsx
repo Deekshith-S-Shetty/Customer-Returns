@@ -42,9 +42,7 @@ const DeliveryHome = () => {
               </div>
             ))
           ) : (
-            <div className="product">
               <p className="classic">No deliveries yet</p>
-            </div>
           )
         ) : (
           <div className="circle" style={{ cursor: "progress" }}>

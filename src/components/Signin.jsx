@@ -4,12 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   auth,
   customerArray,
-  db,
   deliveryArray,
   manufacturerArray,
 } from "./Firebase";
 import "./Styles/signup_signin.css";
-import { doc, getDoc } from "firebase/firestore";
 import { LoginContext } from "../Context/Context";
 
 export default function Signin() {

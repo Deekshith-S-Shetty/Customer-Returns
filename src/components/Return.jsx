@@ -74,9 +74,8 @@ export default function Return() {
       images: updateImages,
     };
     // Add document to the subcollection
-    console.log(updatedReturn);
 
-    await updateData(mainDocRef, updatedReturn);
+    await updateData(mainDocRef,  updatedReturn );
 
     navigate("/customer");
   };
