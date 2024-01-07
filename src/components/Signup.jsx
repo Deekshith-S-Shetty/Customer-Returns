@@ -13,6 +13,7 @@ export default function Signup() {
     userType: "customer",
     password: "",
     cpassword: "",
+    gstNumber:"",
   });
 
   const { account, setAccount } = useContext(LoginContext);
@@ -30,12 +31,21 @@ export default function Signup() {
         //collection reference WRT database
         const collectionRef = collection(db, input.userType);
 
-        //Creating new Doc inside the collection
-        const docRef = doc(collectionRef, data.user.uid);
-        setDoc(docRef, {
+        //conditional gst append
+        const docObject = {
           userType: input.userType,
           Email: input.email,
           Name: input.fullName,
+        }
+
+        if(input.gstNumber){
+          docObject.gstNumber=input.gstNumber
+        }
+
+        //Creating new Doc inside the collection
+        const docRef = doc(collectionRef, data.user.uid);
+        setDoc(docRef, {
+         ...docObject
         })
           .then(() => {
             navigate(`/${input.userType.toLowerCase()}`);
@@ -132,6 +142,8 @@ export default function Signup() {
                     type="text"
                     placeholder="Enter GST Numbber"
                     name="gstNumber"
+                    onChange={handleChange}
+                    value={input.gstNumber}
                     required
                   />
                   <label>GST Number</label>

@@ -94,7 +94,7 @@ const AdminReview = () => {
 
     setImgData(documentData);
   };
-  console.log(imgData);
+
   useEffect(() => {
     getData(id);
   }, []);

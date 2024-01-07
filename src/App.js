@@ -106,7 +106,7 @@ function App() {
       setAccount({ data: docSnap.data() });
     } else {
       console.log("error");
-      alert("Somewent wrong please try again");
+      // alert("Something went wrong please try again");
     }
     return userType;
   };

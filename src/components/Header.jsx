@@ -46,7 +46,6 @@ export default function Header() {
   };
 
   const handleHamClick = () => {
-    console.log("hi");
     setHamburger(!hamburger);
     console.log(hamburger);
   };

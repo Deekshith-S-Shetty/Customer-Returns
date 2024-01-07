@@ -28,7 +28,6 @@ export default function Admin() {
   useEffect(() => {
     getproducts();
   }, []);
-  console.log(productsArr);
 
   return (
     <div className="admin-container">

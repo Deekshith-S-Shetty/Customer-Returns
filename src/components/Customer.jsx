@@ -35,55 +35,62 @@ export default function Customer() {
       <div className="customer-products">
         <h2 className="orders-heading">YOUR ORDERS</h2>
         {account ? (
-          account.item?.map((data, index) => (
-            <div className="customer-product" key={index}>
-              <div className="customer-product-image">
-                <img
-                  src={data.product.image}
-                  alt="laptop"
-                  className="customer-product-image"
-                />
+          account.item ? (
+            account.item.map((data, index) => (
+              <div className="customer-product" key={index}>
+                <div className="customer-product-image">
+                  <img
+                    src={data.product.image}
+                    alt="laptop"
+                    className="customer-product-image"
+                  />
+                </div>
+                <div className="customer-product-info">
+                  <p className="customer-product-name cu-product-info">
+                    <b>Product Name:</b> &nbsp;&nbsp;{data.product.name}
+                  </p>
+                  <p className="customer-product-id cu-product-info">
+                    <b>Product Id:</b> &nbsp;&nbsp;{data.product.productId}
+                  </p>
+                  <p className="customer-product-price cu-product-info">
+                    <b>Price:</b> &nbsp;&nbsp;{data.product.price}
+                  </p>
+                  <p className="customer-product-status cu-product-info">
+                    <b>Status:</b> &nbsp;
+                    <span className={`${data.product.status}`}>
+                      <span className="point"></span> {data.product.status}
+                    </span>
+                  </p>
+                  {data.product?.remark && (
+                    <span className="customer-product-remark cu-product-info">
+                      {data.product.remark}
+                    </span>
+                  )}
+                  {data.product.return ||
+                  data.product.status !== "delivered" ? (
+                    <button
+                      className="customer-return-btn cancel"
+                      onClick={() => handleCancel(data.product.productId)}
+                      disabled={data.product.status !== "Requested for return"}
+                    >
+                      {data.product.status === "Return initiated"
+                        ? "Return approved"
+                        : "Cancel return"}
+                    </button>
+                  ) : (
+                    <Link
+                      to={`/customer/return/${data.product.productId}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <button className="customer-return-btn">Return</button>
+                    </Link>
+                  )}
+                </div>
               </div>
-              <div className="customer-product-info">
-                <p className="customer-product-name cu-product-info">
-                  <b>Product Name:</b> &nbsp;&nbsp;{data.product.name}
-                </p>
-                <p className="customer-product-id cu-product-info">
-                  <b>Product Id:</b> &nbsp;&nbsp;{data.product.productId}
-                </p>
-                <p className="customer-product-price cu-product-info">
-                  <b>Price:</b> &nbsp;&nbsp;{data.product.price}
-                </p>
-                <p className="customer-product-status cu-product-info">
-                  <b>Status:</b> &nbsp;
-                  <span className={`${data.product.status}`}>
-                    <span className="point"></span> {data.product.status}
-                  </span>
-                </p>
-                {data.product?.remark && (
-                  <span className="customer-product-remark cu-product-info">
-                    {data.product.remark}
-                  </span>
-                )}
-                {data.product.return || data.product.status !== "delivered" ? (
-                  <button
-                    className="customer-return-btn cancel"
-                    onClick={() => handleCancel(data.product.productId)}
-                    disabled={data.product.status !== "Requested for return"}
-                  >
-                   {data.product.status==="Return initiated"?"Return approved":"Cancel return"}
-                  </button>
-                ) : (
-                  <Link
-                    to={`/customer/return/${data.product.productId}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <button className="customer-return-btn">Return</button>
-                  </Link>
-                )}
-              </div>
-            </div>
-          ))
+            ))
+          ) : (
+            <p className="classic">No Orders yet</p>
+          )
         ) : (
           <div className="circle" style={{ cursor: "progress" }}>
             <CircularProgress />

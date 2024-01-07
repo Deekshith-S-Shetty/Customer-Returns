@@ -13,32 +13,39 @@ const DeliveryHome = () => {
       <div className="delivered-products">
         <h2 className="delivery-heading">Deliveries</h2>
         {account ? (
-          account.item?.map((data, index) => (
-            <div className="product" key={index}>
-              <div className="product-image">
-                <img
-                  src={data.product.image}
-                  alt="laptop"
-                  className="product-image"
-                />
+          account.item ? (
+            account.item.map((data, index) => (
+              <div className="product" key={index}>
+                <div className="product-image">
+                  <img
+                    src={data.product.image}
+                    alt="laptop"
+                    className="product-image"
+                  />
+                </div>
+                <div className="product-info">
+                  <p className="product-id p-info">
+                    <b>Product Id:</b> &nbsp;&nbsp;{data.product.productId}
+                  </p>
+                  <p className="product-name p-info">
+                    <b>Shipping Address:</b> &nbsp;&nbsp;
+                    {data.delivery.shipping}
+                  </p>
+                  <p className="product-status p-info">
+                    {" "}
+                    <b>Status:</b> &nbsp;
+                    <span className={`${data.delivery.status}`}>
+                      <span className="point"></span> {data.delivery.status}
+                    </span>
+                  </p>
+                </div>
               </div>
-              <div className="product-info">
-                <p className="product-id p-info">
-                  <b>Product Id:</b> &nbsp;&nbsp;{data.product.productId}
-                </p>
-                <p className="product-name p-info">
-                  <b>Shipping Address:</b> &nbsp;&nbsp;{data.delivery.shipping}
-                </p>
-                <p className="product-status p-info">
-                  {" "}
-                  <b>Status:</b> &nbsp;
-                  <span className={`${data.delivery.status}`}>
-                    <span className="point"></span> {data.delivery.status}
-                  </span>
-                </p>
-              </div>
+            ))
+          ) : (
+            <div className="product">
+              <p className="classic">No deliveries yet</p>
             </div>
-          ))
+          )
         ) : (
           <div className="circle" style={{ cursor: "progress" }}>
             <CircularProgress />

@@ -34,12 +34,8 @@ export default function Signin() {
         } else {
           userType = "admin";
         }
-        const docRef = doc(db, userType, authUser.user.uid);
-
-        // Fetch the document
-        const docSnap = await getDoc(docRef);
-
-        const direction = docSnap.data().userType.toLowerCase();
+        
+        const direction = userType.toLowerCase();
 
         navigate(`/${direction}`);
       })
