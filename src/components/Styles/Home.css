@@ -58,3 +58,9 @@
 .home-link:hover {
   filter: brightness(135%);
 }
+
+@media only screen and (max-width: 570px) {
+  .home-container {
+    width: 75%;
+  }
+}
