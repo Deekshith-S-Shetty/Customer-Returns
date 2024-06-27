@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="https://github.com/balagowda/Customer-Returns/assets/99543661/afa5bfe4-8149-4bb2-bf36-3d8a45984cd0"
+" alt="Customer-Returns Logo" width="200">
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **About the Project**
 
-## Available Scripts
+A robust customer-returns system where customers can request product returns, manufacturers manage product listings, delivery personnel update delivery status, and admins evaluate and approve return requests based on customer-uploaded images. This ensures a streamlined and efficient process for managing product returns and maintaining customer satisfaction.
+### Project Link : [Customer-Return](https://https://customerreturn-97bdd.web.app/)
 
-In the project directory, you can run:
+## **Built With**
 
-### `npm start`
+- **React**: For building the user interface.
+- **Firebase**: For authentication, database, and hosting.
+- **HTML**: For structuring web pages.
+- **CSS**: For styling the application.
+- **JavaScript**: For implementing dynamic functionalities and logic.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **Screenshots**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<p align="center"><strong>Authentication Page 🔏</strong></p>
+<p align="center">
+  <img src="https://github.com/balagowda/Customer-Returns/assets/99543661/2c04f53a-8387-4830-b7b2-3793ddd7b7cd" alt="Auth Page">
+</p>
+<hr />
+<br />
 
-### `npm test`
+<p align="center"><strong>Customer Page 🧑‍💻</strong></p>
+<p align="center">
+  <img src="https://github.com/balagowda/Customer-Returns/assets/99543661/2bde7902-d228-4cab-b1f7-d7751676e3f2" alt="Customer Page">
+</p>
+<hr />
+<br />
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p align="center"><strong>Manufacturer Page 🏭</strong></p>
+<p align="center">
+  <img src="https://github.com/balagowda/Customer-Returns/assets/99543661/2bde7902-d228-4cab-b1f7-d7751676e3f2" alt="Manufacture">
+</p>
+<p align="center">
+  <img src="https://github.com/balagowda/Customer-Returns/assets/99543661/9b472de2-00b8-4b0f-a879-d190756e1698" alt="Manufacture">
+</p>
+<hr />
+<br />
 
-### `npm run build`
+<p align="center"><strong>Delivery Page 🚚</strong></p>
+<p align="center">
+  <img src="https://github.com/balagowda/Customer-Returns/assets/99543661/a2153ab8-005a-481a-9ec4-8ae522ab921e" alt="Delivery">
+</p>
+<p align="center">
+  <img src="https://github.com/balagowda/Customer-Returns/assets/99543661/c932319f-3b3a-4e7c-ac44-3c06a88b7265" alt="Delivery">
+</p>
+<hr />
+<br />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p align="center"><strong>Admin Page ⚙️</strong></p>
+<p align="center">
+  <img src="https://github.com/balagowda/Customer-Returns/assets/99543661/d40feff5-135f-4a59-8024-b66eb281209c" alt="Admin">
+</p>
