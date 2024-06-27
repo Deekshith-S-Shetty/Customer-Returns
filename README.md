@@ -6,7 +6,7 @@
 ## **About the Project**
 
 A robust customer-returns system where customers can request product returns, manufacturers manage product listings, delivery personnel update delivery status, and admins evaluate and approve return requests based on customer-uploaded images. This ensures a streamlined and efficient process for managing product returns and maintaining customer satisfaction.
-### Project Link : [Customer-Return](https://https://customerreturn-97bdd.web.app/)
+### Project Link : [Customer-Return](https://customerreturn-97bdd.web.app/)
 
 ## **Built With**
 
